@@ -1,0 +1,4 @@
+CF_API_TOKEN="${CF_API_TOKEN:-}"
+
+curl "https://api.cloudflare.com/client/v4/accounts/396450b33daade69ba31fccd40794e56/tokens/verify" \
+-H "Authorization: Bearer ${CF_API_TOKEN}"
