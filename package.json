@@ -3,6 +3,7 @@
   "version": "1.0.4",
   "description": "Active-IQ: Intelligent Automation & Security Architecture",
   "author": "Raymond Johnson <supere989@gmail.com>",
+  "repository": "github:supere989/active-iq",
   "private": true,
   "main": "main.cjs",
   "type": "module",
@@ -13,7 +14,7 @@
     "electron": "electron .",
     "electron-dev": "concurrently \"npm run dev\" \"wait-on http://localhost:5173 && electron .\"",
     "icons": "node scripts/generate-icons.js",
-    "dist": "npm run icons && npm run build && electron-builder --publish=never"
+    "dist": "npm run icons && npm run build && electron-builder"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.3",
