@@ -1,9 +1,12 @@
 {
   "name": "active-iq",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Active-IQ: Intelligent Automation & Security Architecture",
   "author": "Raymond Johnson <supere989@gmail.com>",
-  "repository": "github:supere989/active-iq",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/supere989/active-iq.git"
+  },
   "private": true,
   "main": "main.cjs",
   "type": "module",
