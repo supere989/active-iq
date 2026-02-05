@@ -13,15 +13,17 @@ A modern and responsive personal website for Raymond Johnson.
 
 ## Setup
 
-1. Clone this repository
-2. Open `index.html` in your web browser
+1. **Prerequisites**: Ensure you have [Node.js](https://nodejs.org/) installed.
+2. **Installation**: Run `npm install` to install dependencies.
+3. **Development**: Run `npm run dev` to start the local development server.
+4. **Build**: Run `npm run build` to build for production.
 
 ## Technologies Used
 
-- HTML5
-- CSS3
-- JavaScript
-- Font Awesome (for icons)
+- React (Vite)
+- Tailwind CSS
+- Electron (for desktop build)
+
 
 ## Customization
 
