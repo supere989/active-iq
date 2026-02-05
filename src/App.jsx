@@ -1,277 +1,117 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import Whitepaper from './Whitepaper';
+import { motion, AnimatePresence } from 'framer-motion';
 import Blog from './Blog';
-import avatarImage from '../avatar/MUGSHOT.jpg';
-import resumePdf from '../Resume.pdf?url';
 
-const summary = `Analytically minded technology leader bridging enterprise infrastructure, security, and AI-driven automation to deliver resilient, high-performance operations across regulated environments.`;
-
-const stats = [
-  { value: '10+', label: 'Years leading enterprise support & engineering teams' },
-  { value: '8+', label: 'Years orchestrating hybrid cloud & virtualization programs' },
-  { value: '6+', label: 'Years architecting blockchain security platforms' },
-];
+/* ── Navigation ── */
 
 const navigation = [
-  { href: '#about', label: '// ABOUT' },
-  { href: '#experience', label: '// EXPERIENCE' },
-  { href: '#projects', label: '// PROJECTS' },
-  { href: '#expertise', label: '// EXPERTISE' },
-  { href: '#education', label: '// EDUCATION' },
-  { href: '#vectorguard', label: '// VECTORGUARD' },
+  { href: '#problem', label: '// THE PROBLEM' },
+  { href: '#technology', label: '// TECHNOLOGY' },
+  { href: '#nano', label: '// NANO' },
+  { href: '#comparison', label: '// COMPARE' },
   { href: '/blog', label: '// BLOG', isRoute: true },
   { href: '#contact', label: '// CONTACT' },
 ];
 
-const focusAreas = [
+/* ── Blog data (shared with splash) ── */
+
+const latestBlogPosts = [
   {
-    symbol: '[CLOUD]',
-    title: 'Cloud & Systems Engineering',
-    description:
-      'Design and maintain hybrid cloud footprints spanning AWS, Azure, and on-prem data centers with strict SLA and compliance targets.',
-    highlights: [
-      'Automated server deployment pipelines and diskless boot orchestration',
-      'Linux server clustering, failover, and performance optimization',
-      'Microsoft 365, Active Directory, and remote infrastructure administration',
-    ],
-  },
-  {
-    symbol: '[SHIELD]',
-    title: 'Security & Trust Engineering',
-    description:
-      'Fortify critical environments with defense-in-depth strategies that protect data, people, and operations across distributed enterprises.',
-    highlights: [
-      'CJIS Level 4 certified with rigorous compliance stewardship',
-      'Network hardening across Meraki, Sophos, SonicWall, and site-to-site VPN fabrics',
-      'Blockchain infrastructure design delivering resilient, tamper-evident services',
-    ],
-  },
-  {
-    symbol: '[CPU]',
-    title: 'AI & Intelligent Automation',
-    description:
-      'Integrate intelligent agents, analytics, and automation into service delivery to unlock predictive insight and rapid remediation.',
-    highlights: [
-      'Prompt engineering for ChatGPT-class assistants and offline AI agents',
-      'Data visualization and telemetry dashboards to uphold QoS benchmarks',
-      'Machine learning and NLP experimentation for operational intelligence',
-    ],
-  },
-  {
-    symbol: '[OPS]',
-    title: 'Operations Leadership',
-    description:
-      'Guide cross-functional teams delivering secure, always-on infrastructure and customer-first experiences.',
-    highlights: [
-      'Directed GPU compute build-outs achieving 99.999% uptime across distributed nodes',
-      'Coordinated enterprise desktop engineering and managed virtual device deployments',
-      'Mentored technicians, authored SOPs, and aligned stakeholders to transformation roadmaps',
-    ],
+    slug: 'vectorguard-nano',
+    title: 'Introducing VectorGuard-Nano: Free Secure Messaging for AI Agents',
+    date: 'February 5, 2026',
+    excerpt:
+      'The AI agent revolution is here, but there\'s a critical gap: no standard for secure agent-to-agent communication. Today we\'re releasing VectorGuard-Nano as free, MIT-licensed open-source software.',
+    tags: ['AI Security', 'Open Source', 'Product Launch'],
   },
 ];
 
-const experiences = [
+/* ── VectorGuard Data (from whitepaper docs) ── */
+
+const coreComponents = [
   {
-    company: 'Devfuzion IT, Marketing & Design',
-    role: 'IT Technician Tier III',
-    period: 'October 2018 \u2013 Present',
-    location: 'Kennewick, WA',
-    contributions: [
-      'Deliver Tier III managed services across Microsoft 365, hybrid Active Directory, and distributed infrastructure estates.',
-      'Engineer AI-driven automations, including prompt-engineered assistants and offline AI agent workflows for client support.',
-      'Administer firewalls, VPNs, remote monitoring, and security auditing for regulated small-to-mid sized enterprises.',
-      'Harden desktop environments with Group Policy, SQL Server integrations, and proactive incident response.',
+    symbol: '[HELIX]',
+    title: 'Helix Protocol & EMDM',
+    description: 'Bilateral Euclidean Mean Derivation Measurement exchange between two AI models. Helix captures runtime activations, pairs them with model anchors, and samples Euclidean vectors at 25%, 50%, and 75% intervals to produce shared FP32 digit streams.',
+    bullets: [
+      'Session-initialization prompts capture FP32 activation tensors for selected layers',
+      'Constructs 32-column x 64-row tables transposed into (x,y,z) triplet tuples',
+      'Both models exchange EMDM samples to derive a shared VectorStream digit reservoir',
     ],
   },
-  {
-    company: 'Motive IQ',
-    role: 'Blockchain & Fintech Infrastructure Engineer',
-    period: 'June 2016 \u2013 September 2018',
-    location: 'Kennewick, WA',
-    contributions: [
-      'Directed blockchain and fintech infrastructure programs with detailed project plans and executive-ready presentations.',
-      'Automated Linux operations through diskless boot processes, process recovery, and secure SSH orchestration.',
-      'Authored policies, procedures, and technical documentation to align stakeholders and investors.',
-      'Managed inventory, cost estimation, and procurement to deliver resilient compute installations.',
-    ],
-  },
-  {
-    company: 'CompuCom / Amazon Data Services',
-    role: 'Data Center Operations Technician',
-    period: 'February 2016 \u2013 May 2016',
-    location: 'Umatilla, OR',
-    contributions: [
-      'Triaged high-volume data center ticket queues while coordinating change management resources across global teams.',
-      'Enforced security and compliance for personnel, mobile devices, and physical access inside controlled facilities.',
-      'Led ongoing training and knowledge transfer for service engineering staff to accelerate incident resolution.',
-      'Executed emergency equipment repairs and resource planning to maintain aggressive SLA targets.',
-    ],
-  },
-  {
-    company: 'Apex Systems',
-    role: 'Desktop Support Engineer',
-    period: 'February 2014 \u2013 May 2015',
-    location: 'Pasco, WA',
-    contributions: [
-      'Supported an enterprise environment of 700+ devices with SLA-driven troubleshooting and customer service.',
-      'Managed Wyse managed virtual devices in medical environments, preserving QoS and compliance metrics.',
-      'Led malware remediation, imaging, and lifecycle management for desktop and mobile endpoints.',
-      'Partnered with cross-functional teams to diagnose complex infrastructure and application issues.',
-    ],
-  },
-];
-
-const projects = [
-  {
-    title: 'Hybrid MSP Automation Platform',
-    description:
-      'Automated onboarding, configuration management, and incident response workflows for managed service clientele using cloud-native tooling.',
-    tech: ['Azure', 'PowerShell', 'Microsoft 365', 'Python'],
-    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80',
-    link: 'https://github.com/raymondjohnson',
-  },
-  {
-    title: 'Blockchain Operations Control Suite',
-    description:
-      'Designed monitoring, recovery, and governance frameworks for high-availability blockchain mining and fintech infrastructure.',
-    tech: ['Linux', 'Terraform', 'Prometheus', 'Go'],
-    image: 'https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?auto=format&fit=crop&w=1200&q=80',
-    link: 'https://www.linkedin.com/in/raymondjohnson',
-  },
-  {
-    title: 'Clinical Desktop Modernization Program',
-    description:
-      'Modernized healthcare desktop platforms with virtualization, automated deployments, and resilient security baselines.',
-    tech: ['Windows 10', 'SCCM', 'VMware', 'Power BI'],
-    image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=80',
-    link: 'mailto:raymondj@active-iq.com?subject=Clinical%20Desktop%20Modernization',
-  },
-];
-
-const education = [
-  {
-    institution: 'Columbia Basin College',
-    program: 'A.A. Computer Science \u2013 Cyber Security',
-    period: 'January 2017 \u2013 April 2017',
-    notes: 'Focused on network defense, incident response, and secure systems architecture.',
-  },
-  {
-    institution: 'Keene IT',
-    program: 'Windows 2000 Advanced Server Training',
-    period: 'January 2000 \u2013 February 2000',
-    notes: 'Certificate of completion covering enterprise server administration and Active Directory.',
-  },
-  {
-    institution: 'Republic High School',
-    program: 'Diploma, Computer & Information Sciences',
-    period: 'September 1993 \u2013 June 1995',
-    notes: 'STEM-focused curriculum with early programming and systems coursework.',
-  },
-];
-
-const certifications = [
-  {
-    name: 'CJIS Level 4',
-    issuer: 'Washington State Patrol',
-    period: 'October 2024',
-    notes: 'Validated to manage criminal justice information with rigorous security controls.',
-  },
-  {
-    name: 'CompTIA A+',
-    issuer: 'CompTIA',
-    period: 'April 2014 \u2013 April 2017',
-    notes: 'Completed 90-minute exam in 24 minutes with a 94% score.',
-  },
-  {
-    name: 'Dell Certified Technician (Desktop, Portable, Server, Printer)',
-    issuer: 'Dell',
-    period: 'April 2014 \u2013 April 2016',
-    notes: 'Authorized to service and repair Dell enterprise hardware platforms.',
-  },
-  {
-    name: 'Microsoft Windows 2000 Advanced Server Certification',
-    issuer: 'Microsoft',
-    period: 'January 2000 \u2013 January 2002',
-    notes: 'Advanced server administration, Active Directory, and enterprise infrastructure.',
-  },
-];
-
-const vectorGuardMetrics = [
-  {
-    title: 'Unbounded Keyspace',
-    description: 'Permutation-driven index tables produce limitless VectorFlow cypher streams from any 3D point cloud.',
-  },
-  {
-    title: 'Deterministic Measurement Path',
-    description: 'Index-of-indices graphs serialize every point-to-point measurement for reproducible stream generation.',
-  },
-  {
-    title: 'Cross-Model Synchronization',
-    description: 'Shared table metadata lets different model architectures derive aligned VectorGuard primitives.',
-  },
-];
-
-const vectorGuardComponents = [
   {
     symbol: '[KEY]',
     title: 'VectorGuard Key Derivation',
-    description: 'Transforms neural weight hierarchies into deterministic cypher streams bound to specific model instances.',
+    description: 'Forward-processing algorithm that generates cryptographic material from structured neural data. Baseline weights form Cloud A anchors; runtime activations form Cloud B entropy points.',
     bullets: [
-      'Maps weight and context data into 3D point clouds using permutation-indexed value tables.',
-      'Traverses deterministic index-of-indices paths to calculate point pair measurements.',
-      'Locks encryption to shared model architecture, weights, and preserved measurement metadata.',
+      'Maps weight and activation data into 3D point clouds using permutation-indexed tables',
+      'Deterministic: identical model weights and prompts reproduce identical layouts',
+      'Unidirectional transformation \u2014 weights to keys, never reversed',
     ],
   },
   {
     symbol: '[LOCK]',
-    title: 'VectorLock Data Encryption',
-    description: 'Applies five sequential XOR layers using user, model, and positional entropy to seal data at rest.',
+    title: 'VectorLock Encryption',
+    description: 'Multi-layered data encryption using Helix-derived key material. Bytes route through a 3x3x3 Rubik\'s Cube style lattice permutation keyed by model anchors before XOR layers.',
     bullets: [
-      'Identity-bound entropy binds secrets to authorized operators.',
-      'Model fingerprint indices guarantee only matched models can decrypt.',
-      'Byte-level position mixing thwarts statistical or replay analysis.',
+      'Layer 1: Identity entropy binds encryption to user identity',
+      'Layer 2: 24-bit model fingerprint indices bind to model structure',
+      'Layers 3\u20135: Anchor rotations, weight values, and position mixing prevent pattern analysis',
+    ],
+  },
+  {
+    symbol: '[FLOW]',
+    title: 'VectorFlow Stream Generation',
+    description: 'Consumes the shared digit reservoir to deliver synchronized cypher streams. Sliding-window consumption guided by the first 256 Helix headers, mixing digits with modular arithmetic.',
+    bullets: [
+      'Session-bound cypher stream synchronized across both models',
+      'Creates session-unique streams destroyed automatically on completion',
+      'Maintains server blindness \u2014 intermediaries never see intelligible data',
     ],
   },
   {
     symbol: '[STREAM]',
-    title: 'VectorFlow & VectorStream',
-    description: 'Generates and applies cypher streams to tokenizer output for AI-to-AI transport security.',
+    title: 'VectorStream Token Application',
+    description: 'Applies VectorFlow cypher stream primitives to tokenizer token output values during AI-to-AI transmission. Each token position references specific table, anchor, and sample metadata.',
     bullets: [
-      'Scaling is governed by the client hardware envelope and GPU-accelerated measurement pipelines.',
-      'Creates session-unique cypher streams destroyed automatically on completion.',
-      'Maintains server blindness\u2014intermediaries never see intelligible token data.',
+      'Token IDs converted to digit sequences and mixed with VectorStream digits',
+      'Digit-wise modular addition plus conditional XOR with model-derived entropy',
+      'Prevents replay or reordering attacks through calculation-order alignment',
     ],
   },
 ];
 
-const vectorGuardGuarantees = [
-  'Deterministic key regeneration only from exact model weights and fingerprints.',
-  'Perfect forward secrecy through ephemeral session data destruction.',
-  'Tamper detection via temporal metadata and model state validation.',
+const securityProperties = [
+  'Model-bound: cypher streams tied to specific model instances, table selections, and prompt templates',
+  'Session isolation: each Helix exchange regenerates VectorStream headers and reservoirs',
+  'Session-limited decodability: VectorStream data destroyed when headers are exhausted',
+  'Server blindness: network intermediaries cannot decrypt without matching Helix envelopes',
+  'Perfect forward secrecy: no persistent keys stored between sessions',
+  'Whisper Leak immune: no consistent traffic patterns for adversarial model training',
 ];
 
-const vectorGuardUseCases = [
-  {
-    title: 'AI-to-AI Communication',
-    description: 'Secures inter-model collaboration, distributed agents, and privacy-preserving orchestration.',
-  },
-  {
-    title: 'Data Protection',
-    description: 'Encrypts storage, databases, and configuration artifacts with model-bound keys.',
-  },
-  {
-    title: 'Network Security',
-    description: 'Hardens inference pipelines with zero-trust overlays and immutable audit trails.',
-  },
-  {
-    title: 'Performance Engineering Services',
-    description: 'VectorGuard optimization engagements tune measurement pipelines and infrastructure for maximum throughput on bespoke hardware.',
-  },
+const nanoFeatures = [
+  { label: 'HMAC-SHA256 character shifting', detail: 'Deterministic obfuscation with shared secrets' },
+  { label: 'Zero dependencies', detail: 'Pure JavaScript, ~100 lines of auditable code' },
+  { label: 'Round-trip guaranteed', detail: 'Perfect message recovery every time' },
+  { label: 'Agent-friendly', detail: 'Works with MCP, Claude Desktop, OpenClaw' },
+  { label: 'MIT licensed', detail: 'Free for any project, commercial or personal' },
 ];
 
-/* ── Terminal UI helper components ── */
+const comparisonRows = [
+  { feature: 'Method', nano: 'HMAC-SHA256 character shifting', full: 'Model-bound point cloud cryptography (Helix/EMDM)' },
+  { feature: 'Security Basis', nano: 'Pre-shared secrets', full: 'AI model weights + runtime activations' },
+  { feature: 'Performance', nano: 'Instant (CPU)', full: 'Billions of digits/second (CUDA)' },
+  { feature: 'Whisper Leak', nano: 'Partial (timing patterns remain)', full: 'Complete immunity (no consistent patterns)' },
+  { feature: 'Forward Secrecy', nano: 'No', full: 'Yes (context-driven rotation)' },
+  { feature: 'Key Exchange', nano: 'Manual pre-shared', full: 'Automatic (model distribution = key distribution)' },
+  { feature: 'Session Management', nano: 'Manual timestamp', full: 'Automatic (Helix bilateral exchange)' },
+  { feature: 'Use Case', nano: 'Development, testing, casual use', full: 'Enterprise production, compliance' },
+  { feature: 'License', nano: 'MIT (free)', full: 'Enterprise licensing' },
+];
+
+/* ── Terminal UI Components ── */
 
 const TerminalBox = ({ title, children, className = '' }) => (
   <div className={`terminal-box ${className}`}>
@@ -291,8 +131,6 @@ const SectionDivider = ({ label }) => (
   </div>
 );
 
-/* ── GitHub / LinkedIn SVG icons ── */
-
 const GitHubIcon = ({ className = 'h-5 w-5' }) => (
   <svg className={className} fill="currentColor" viewBox="0 0 24 24">
     <path
@@ -303,20 +141,111 @@ const GitHubIcon = ({ className = 'h-5 w-5' }) => (
   </svg>
 );
 
-const LinkedInIcon = ({ className = 'h-5 w-5' }) => (
-  <svg className={className} fill="currentColor" viewBox="0 0 24 24">
-    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-  </svg>
-);
+/* ── Blog Splash Overlay ── */
+
+const BlogSplash = ({ onDismiss }) => {
+  const [countdown, setCountdown] = useState(5);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCountdown((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          onDismiss();
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [onDismiss]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="fixed inset-0 z-[100] bg-void flex items-center justify-center cursor-pointer"
+      onClick={onDismiss}
+    >
+      <div className="max-w-3xl mx-auto px-6 w-full">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-center mb-10"
+        >
+          <p className="text-phosphor text-xs uppercase tracking-widest mb-3">
+            {'>'} Active-IQ Systems // Latest News<span className="cursor-blink">_</span>
+          </p>
+          <h1 className="text-2xl md:text-4xl font-bold text-phosphor glow-text">
+            BULLETIN FEED
+          </h1>
+        </motion.div>
+
+        {latestBlogPosts.map((post, index) => (
+          <motion.div
+            key={post.slug}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 + index * 0.15 }}
+            className="terminal-box mb-4"
+          >
+            <div className="terminal-header">
+              <span className="terminal-dot terminal-dot-red" />
+              <span className="terminal-dot terminal-dot-yellow" />
+              <span className="terminal-dot terminal-dot-green" />
+              <span className="ml-2">LATEST.broadcast</span>
+            </div>
+            <div className="p-6">
+              <div className="flex items-center gap-3 mb-3">
+                <span className="text-phosphor text-xs font-bold">[NEW]</span>
+                <span className="text-amber text-xs">{post.date}</span>
+              </div>
+              <h2 className="text-base md:text-lg font-bold text-phosphor mb-2">{post.title}</h2>
+              <p className="text-sm text-offwhite/70 leading-relaxed">{post.excerpt}</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {post.tags.map((tag) => (
+                  <span key={tag} className="border border-phosphor/30 px-2 py-0.5 text-[10px] text-phosphor uppercase tracking-wider">
+                    [{tag}]
+                  </span>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        ))}
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8 }}
+          className="text-center mt-8"
+        >
+          <p className="text-offwhite/30 text-xs">
+            Entering main terminal in <span className="text-phosphor font-bold">{countdown}</span>s
+            <span className="text-offwhite/20"> \u2014 click anywhere to skip</span>
+          </p>
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+};
 
 /* ── Home Page ── */
 
 const Home = () => {
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showSplash, setShowSplash] = useState(true);
 
   return (
     <div id="home-top" className="relative min-h-screen bg-void text-offwhite font-mono">
+      {/* Blog Splash Overlay */}
+      <AnimatePresence>
+        {showSplash && <BlogSplash onDismiss={() => setShowSplash(false)} />}
+      </AnimatePresence>
+
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-void/95 backdrop-blur-sm z-50 border-b border-phosphor/20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -345,7 +274,6 @@ const Home = () => {
                 </button>
               ))}
             </div>
-            {/* Mobile hamburger */}
             <button
               type="button"
               className="md:hidden text-phosphor focus:outline-none"
@@ -361,7 +289,6 @@ const Home = () => {
               </svg>
             </button>
           </div>
-          {/* Mobile menu */}
           {mobileMenuOpen && (
             <div className="md:hidden border-t border-phosphor/10 pb-4">
               {navigation.map(({ href, label, isRoute }) => (
@@ -392,136 +319,148 @@ const Home = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="grid lg:grid-cols-[1fr_auto] gap-10 items-center"
+            className="text-center max-w-4xl mx-auto"
           >
-            <div>
-              <p className="text-amber text-sm uppercase tracking-widest mb-4">
-                {'>'} Intelligent Automation & Security Architecture<span className="cursor-blink">_</span>
-              </p>
-              <h1 className="text-5xl md:text-7xl font-bold text-phosphor glow-text tracking-tight">
-                ACTIVE-IQ
-              </h1>
-              <p className="mt-6 text-lg text-offwhite/80 leading-relaxed max-w-2xl">
-                {summary}
-              </p>
-              <div className="mt-8 space-y-2 text-sm text-offwhite/60">
-                {stats.map((stat) => (
-                  <p key={stat.label}>
-                    <span className="text-phosphor font-bold">[{stat.value}]</span>{' '}
-                    {stat.label}
-                  </p>
-                ))}
-              </div>
-              <div className="mt-8 flex flex-wrap gap-4">
-                <button
-                  type="button"
-                  onClick={() => navigate('/whitepaper')}
-                  className="btn-terminal-filled"
-                >
-                  Discover VectorGuard
-                </button>
-                <a href={resumePdf} download className="btn-terminal inline-block">
-                  Download Resume
-                </a>
-              </div>
-              <div className="mt-8 flex flex-wrap gap-6 text-xs text-offwhite/50">
-                <span>$ location: Warden, WA 98857</span>
-                <a href="tel:+15095189923" className="hover:text-phosphor transition-colors">
-                  $ phone: +1 (509) 518-9923
-                </a>
-                <a href="mailto:raymondj@active-iq.com" className="hover:text-phosphor transition-colors">
-                  $ email: raymondj@active-iq.com
-                </a>
-              </div>
+            <p className="text-amber text-sm uppercase tracking-widest mb-6">
+              {'>'} Model-Bound Cryptography & AI Security<span className="cursor-blink">_</span>
+            </p>
+            <h1 className="text-5xl md:text-7xl font-bold text-phosphor glow-text tracking-tight">
+              ACTIVE-IQ
+            </h1>
+            <p className="mt-2 text-lg md:text-2xl font-bold text-phosphor/60 tracking-wide">
+              SYSTEMS
+            </p>
+            <p className="mt-8 text-base md:text-lg text-offwhite/70 leading-relaxed max-w-3xl mx-auto">
+              VectorGuard is a proprietary geometric obfuscation system that derives unbounded security surfaces from AI model fingerprints and temporal states. It enables secure, zero-trust AI-to-AI communication without traditional key exchange.
+            </p>
+            <div className="mt-10 flex flex-wrap justify-center gap-4">
+              <button
+                type="button"
+                onClick={() => document.getElementById('technology')?.scrollIntoView({ behavior: 'smooth' })}
+                className="btn-terminal-filled"
+              >
+                Explore the Technology
+              </button>
+              <a
+                href="https://github.com/Active-IQ/VectorGuard-Nano"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-terminal inline-block"
+              >
+                Get VectorGuard-Nano (Free)
+              </a>
             </div>
-            <div className="hidden lg:block">
-              <img
-                src={avatarImage}
-                alt="Raymond Johnson"
-                className="h-64 w-64 object-cover security-feed"
-              />
+            <div className="mt-10 flex flex-wrap justify-center gap-8 text-xs text-offwhite/40">
+              <span>[WHISPER LEAK IMMUNE]</span>
+              <span>[CUDA ACCELERATED]</span>
+              <span>[ZERO KEY EXCHANGE]</span>
+              <span>[PERFECT FORWARD SECRECY]</span>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="py-20">
+      {/* The Problem Section */}
+      <section id="problem" className="py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionDivider label="ABOUT" />
+          <SectionDivider label="THE PROBLEM" />
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <TerminalBox title="ABOUT.sys">
-              <div className="grid gap-8 lg:grid-cols-[auto_1fr] items-center">
-                <div className="hidden lg:block">
-                  <img
-                    src={avatarImage}
-                    alt="Raymond Johnson portrait"
-                    className="h-56 w-56 object-cover security-feed"
-                  />
+            <TerminalBox title="THREAT_ASSESSMENT.log">
+              <div className="grid gap-8 lg:grid-cols-2">
+                <div>
+                  <h3 className="text-lg font-bold text-phosphor mb-4">The MCP Security Gap</h3>
+                  <p className="text-sm text-offwhite/70 leading-relaxed mb-4">
+                    Anthropic&apos;s Model Context Protocol (MCP) revolutionized AI-tool integration, but its transport layer shift from mandatory SSL to flexible HTTP streaming over TLS 1.3 created a critical security gap in the data custody chain for AI-to-AI communications.
+                  </p>
+                  <div className="space-y-2 text-xs text-offwhite/60">
+                    <p className="flex items-start gap-2"><span className="text-amber flex-shrink-0">[!]</span> Data custody chain breaks in AI-to-AI communications</p>
+                    <p className="flex items-start gap-2"><span className="text-amber flex-shrink-0">[!]</span> Man-in-the-middle risks on local/private deployments</p>
+                    <p className="flex items-start gap-2"><span className="text-amber flex-shrink-0">[!]</span> Session hijacking during inter-model token handoffs</p>
+                    <p className="flex items-start gap-2"><span className="text-amber flex-shrink-0">[!]</span> IDS/IPS detection of AI communication patterns via metadata</p>
+                  </div>
                 </div>
                 <div>
-                  <p className="text-offwhite/80 leading-relaxed">
-                    I build dependable technology ecosystems that unite cloud, security, blockchain, and AI disciplines. From Tier III managed services to enterprise data centers, my focus is on translating complex challenges into automated, compliant, and highly available platforms that empower teams and customers.
+                  <h3 className="text-lg font-bold text-amber mb-4">[WARNING] Whisper Leak Vulnerability</h3>
+                  <p className="text-sm text-offwhite/70 leading-relaxed mb-4">
+                    Published by Microsoft researchers, Whisper Leak demonstrates that adversaries can infer LLM conversation topics with <span className="text-phosphor font-bold">&gt;98% accuracy</span> by analyzing encrypted TLS packet timing and sizes across 28 providers.
+                  </p>
+                  <div className="space-y-2 text-xs text-offwhite/60">
+                    <p className="flex items-start gap-2"><span className="text-phosphor flex-shrink-0">{'>'}</span> TLS encryption protects content but NOT metadata</p>
+                    <p className="flex items-start gap-2"><span className="text-phosphor flex-shrink-0">{'>'}</span> Current patches (padding, batching) add 2\u20133x bandwidth overhead</p>
+                    <p className="flex items-start gap-2"><span className="text-phosphor flex-shrink-0">{'>'}</span> Microsoft&apos;s own research: &quot;none provides complete protection&quot;</p>
+                    <p className="flex items-start gap-2"><span className="text-phosphor flex-shrink-0">{'>'}</span> Affects ALL major LLM providers (OpenAI, Anthropic, Google, AWS)</p>
+                  </div>
+                  <p className="mt-4 text-xs text-phosphor font-bold">
+                    VectorGuard doesn&apos;t patch Whisper Leak. It makes the attack methodology impossible.
                   </p>
                 </div>
               </div>
             </TerminalBox>
           </motion.div>
-          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
-            {stats.map((stat) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-                className="terminal-box p-6"
-              >
-                <p className="text-3xl font-bold text-phosphor glow-text">{stat.value}</p>
-                <p className="mt-2 text-sm text-offwhite/60">{stat.label}</p>
-              </motion.div>
-            ))}
-          </div>
         </div>
       </section>
 
-      {/* Experience Section */}
-      <section id="experience" className="py-20">
+      {/* Technology Section */}
+      <section id="technology" className="py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionDivider label="EXPERIENCE" />
-          <p className="text-offwhite/60 mb-10 text-sm">
-            Proven record transforming infrastructure, security, and service delivery across MSP, fintech, and enterprise environments.
+          <SectionDivider label="VECTORGUARD TECHNOLOGY" />
+          <p className="text-offwhite/60 mb-4 text-sm">
+            VectorGuard operates as a pre-transport geometric obfuscation layer. The model itself is the key.
           </p>
-          <div className="space-y-6">
-            {experiences.map((experience, index) => (
+          <p className="text-offwhite/40 mb-10 text-xs">
+            {'>'} Token embeddings \u2192 3D point clouds \u2192 Euclidean distance measurements \u2192 FP32 digit streams \u2192 Permutation cypher streams
+          </p>
+
+          {/* Communication Flow */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="mb-8"
+          >
+            <TerminalBox title="PROTOCOL.flow">
+              <h3 className="text-sm font-bold text-phosphor mb-4">AI-to-AI Communication Protocol</h3>
+              <div className="space-y-1 text-xs text-offwhite/60 font-mono">
+                <p><span className="text-amber">[01]</span> Sender AI processes message through local model</p>
+                <p><span className="text-amber">[02]</span> Helix prompt seeds session entropy and captures FP32 activations</p>
+                <p><span className="text-amber">[03]</span> VectorGuard constructs B\u2081/T\u2099 tables, samples EMDM triplets, packages EMDM-A\u2081</p>
+                <p><span className="text-amber">[04]</span> Receiver runs reciprocal Helix sampling, returns EMDM-A\u2082</p>
+                <p><span className="text-amber">[05]</span> Both sides synchronize VectorStream headers from merged FP32 reservoir</p>
+                <p><span className="text-amber">[06]</span> VectorFlow draws digits from shared reservoir to encode token digits</p>
+                <p><span className="text-amber">[07]</span> VectorStream applies modular/XOR mixing, emits cypher-protected tokens</p>
+                <p><span className="text-amber">[08]</span> Receiver VectorStream consumes same headers to decode in lockstep</p>
+                <p><span className="text-amber">[09]</span> Receiver validates stream integrity and presents decrypted message</p>
+              </div>
+            </TerminalBox>
+          </motion.div>
+
+          {/* Core Components */}
+          <div className="space-y-4">
+            {coreComponents.map((comp, index) => (
               <motion.div
-                key={experience.company}
+                key={comp.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ duration: 0.6, delay: index * 0.08 }}
                 viewport={{ once: true }}
               >
-                <TerminalBox title={`${experience.company.split(' ')[0].toUpperCase()}.log`}>
-                  <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between mb-4">
-                    <div>
-                      <h3 className="text-lg font-bold text-phosphor">{experience.role}</h3>
-                      <p className="text-amber text-sm">{experience.company}</p>
-                    </div>
-                    <div className="text-xs text-offwhite/40">
-                      <p>{experience.period}</p>
-                      <p>{experience.location}</p>
-                    </div>
+                <TerminalBox title={comp.title.split(' ')[0].toUpperCase() + '.module'}>
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-phosphor font-bold text-sm">{comp.symbol}</span>
+                    <h3 className="text-sm font-bold text-phosphor">{comp.title}</h3>
                   </div>
+                  <p className="text-xs text-offwhite/60 leading-relaxed mb-3">{comp.description}</p>
                   <div className="space-y-2">
-                    {experience.contributions.map((item) => (
-                      <p key={item} className="text-sm text-offwhite/70 flex items-start gap-2">
+                    {comp.bullets.map((bullet) => (
+                      <p key={bullet} className="text-xs text-offwhite/50 flex items-start gap-2">
                         <span className="text-phosphor/60 flex-shrink-0">{'>'}</span>
-                        <span>{item}</span>
+                        <span>{bullet}</span>
                       </p>
                     ))}
                   </div>
@@ -529,245 +468,143 @@ const Home = () => {
               </motion.div>
             ))}
           </div>
+
+          {/* Security Properties */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="mt-8"
+          >
+            <TerminalBox title="SECURITY.guarantees">
+              <h3 className="text-sm font-bold text-phosphor mb-4">Security Properties</h3>
+              <div className="space-y-2">
+                {securityProperties.map((item) => (
+                  <p key={item} className="text-xs text-offwhite/60 flex items-start gap-2">
+                    <span className="text-phosphor flex-shrink-0">[+]</span>
+                    <span>{item}</span>
+                  </p>
+                ))}
+              </div>
+            </TerminalBox>
+          </motion.div>
         </div>
       </section>
 
-      {/* Projects Section */}
-      <section id="projects" className="py-20">
+      {/* VectorGuard-Nano Section */}
+      <section id="nano" className="py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionDivider label="PROJECTS" />
-          <p className="text-offwhite/60 mb-10 text-sm">
-            Representative programs showcasing automation, security, and operational excellence.
-          </p>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {projects.map((project, index) => (
-              <motion.a
-                key={project.title}
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="group block terminal-box overflow-hidden hover:border-phosphor/50 transition-colors"
-              >
-                <div className="relative h-44 w-full overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="h-full w-full object-cover security-feed transition-transform duration-300 group-hover:scale-105"
-                  />
-                </div>
-                <div className="p-5">
-                  <h3 className="text-base font-bold text-phosphor">{project.title}</h3>
-                  <p className="mt-2 text-xs text-offwhite/60 leading-relaxed">{project.description}</p>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {project.tech.map((tech) => (
-                      <span key={tech} className="border border-phosphor/30 px-2 py-0.5 text-[10px] text-phosphor uppercase tracking-wider">
-                        [{tech}]
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Expertise Section */}
-      <section id="expertise" className="py-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionDivider label="EXPERTISE" />
-          <p className="text-offwhite/60 mb-10 text-sm">
-            Depth across cloud, security, AI, and operational leadership with measurable business impact.
-          </p>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            {focusAreas.map(({ symbol, title, description, highlights }, index) => (
-              <motion.div
-                key={title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <TerminalBox title={title.split(' ')[0].toUpperCase() + '.cfg'}>
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-phosphor font-bold text-sm">{symbol}</span>
-                    <h3 className="text-base font-bold text-phosphor">{title}</h3>
-                  </div>
-                  <p className="text-sm text-offwhite/70 leading-relaxed mb-4">{description}</p>
-                  <div className="space-y-2">
-                    {highlights.map((item) => (
-                      <p key={item} className="text-xs text-offwhite/60 flex items-start gap-2">
-                        <span className="text-phosphor/60 flex-shrink-0">{'>'}</span>
-                        <span>{item}</span>
-                      </p>
-                    ))}
-                  </div>
-                </TerminalBox>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Education & Certifications */}
-      <section id="education" className="py-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionDivider label="EDUCATION & CREDENTIALS" />
-          <p className="text-offwhite/60 mb-10 text-sm">
-            Continuing investment in technical mastery, compliance, and leadership excellence.
-          </p>
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <TerminalBox title="EDUCATION.log">
-                <div className="space-y-6">
-                  {education.map((item, i) => (
-                    <div key={item.program} className="flex gap-3">
-                      <div className="flex flex-col items-center">
-                        <span className="text-phosphor text-xs">{i === education.length - 1 ? '\u2514' : '\u251C'}\u2500\u2500</span>
-                      </div>
-                      <div>
-                        <p className="text-xs text-amber uppercase tracking-wide">{item.period}</p>
-                        <h4 className="mt-1 text-sm font-bold text-phosphor">{item.program}</h4>
-                        <p className="text-xs text-offwhite/60">{item.institution}</p>
-                        <p className="mt-1 text-xs text-offwhite/40">{item.notes}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </TerminalBox>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              viewport={{ once: true }}
-            >
-              <TerminalBox title="CERTIFICATIONS.log">
-                <div className="space-y-6">
-                  {certifications.map((cert, i) => (
-                    <div key={cert.name} className="flex gap-3">
-                      <div className="flex flex-col items-center">
-                        <span className="text-phosphor text-xs">{i === certifications.length - 1 ? '\u2514' : '\u251C'}\u2500\u2500</span>
-                      </div>
-                      <div>
-                        <p className="text-xs text-amber uppercase tracking-wide">{cert.period}</p>
-                        <h4 className="mt-1 text-sm font-bold text-phosphor">{cert.name}</h4>
-                        <p className="text-xs text-offwhite/60">{cert.issuer}</p>
-                        <p className="mt-1 text-xs text-offwhite/40">{cert.notes}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </TerminalBox>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* VectorGuard Section */}
-      <section id="vectorguard" className="py-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionDivider label="VECTORGUARD" />
+          <SectionDivider label="VECTORGUARD-NANO // FREE & OPEN SOURCE" />
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div className="terminal-box border-phosphor/40">
-              <div className="terminal-header">
-                <span className="terminal-dot terminal-dot-red" />
-                <span className="terminal-dot terminal-dot-yellow" />
-                <span className="terminal-dot terminal-dot-green" />
-                <span className="ml-2">VECTORGUARD.sys</span>
+            <TerminalBox title="NANO.release">
+              <div className="text-center mb-6">
+                <h2 className="text-2xl font-bold text-phosphor glow-text mb-2">VectorGuard-Nano</h2>
+                <p className="text-amber text-xs uppercase tracking-widest">MIT Licensed // Free Forever</p>
               </div>
-              <div className="p-8">
-                <div className="text-center mb-8">
-                  <p className="text-phosphor text-4xl font-bold mb-2">[SHIELD]</p>
-                  <h2 className="text-3xl font-bold text-phosphor glow-text">VectorGuard</h2>
-                  <p className="mt-4 text-sm text-offwhite/70 leading-relaxed max-w-3xl mx-auto">
-                    A proprietary cryptographic fabric that binds AI communications, storage, and network defense to the fingerprints of the participating models, delivering zero-trust security without traditional key exchange.
-                  </p>
-                </div>
+              <p className="text-sm text-offwhite/70 leading-relaxed text-center max-w-2xl mx-auto mb-8">
+                Lightweight, open-source secure messaging for AI agents. Drop-in solution for OpenClaw, MCP servers, and Claude Desktop. Start securing your agents today while evaluating the full VectorGuard platform for enterprise.
+              </p>
 
-                <div className="flex justify-center mb-8">
-                  <button
-                    onClick={() => navigate('/whitepaper')}
-                    className="btn-terminal-filled"
-                  >
-                    Read Full Whitepaper
-                  </button>
-                </div>
+              <div className="terminal-box p-4 mb-8 bg-void/50">
+                <pre className="text-xs text-phosphor overflow-x-auto"><code>{`// Simple agent-to-agent secure messaging
+const vgn = new Vgn();
+const secret = "shared-agent-secret-key";
 
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-3 mb-8">
-                  {vectorGuardMetrics.map(({ title, description }) => (
-                    <div key={title} className="terminal-box p-5 text-center">
-                      <p className="text-lg font-bold text-phosphor glow-text">{title}</p>
-                      <p className="mt-2 text-xs text-offwhite/50">{description}</p>
-                    </div>
-                  ))}
-                </div>
+// Agent A sends
+const secured = vgn.obfuscate("Launch data analysis", secret);
 
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-3 mb-8">
-                  {vectorGuardComponents.map(({ symbol, title, description, bullets }) => (
-                    <div key={title} className="terminal-box p-5">
-                      <div className="flex items-center gap-2 mb-3">
-                        <span className="text-phosphor font-bold text-sm">{symbol}</span>
-                        <h3 className="text-sm font-bold text-phosphor">{title}</h3>
-                      </div>
-                      <p className="text-xs text-offwhite/60 leading-relaxed mb-3">{description}</p>
-                      <div className="space-y-2">
-                        {bullets.map((bullet) => (
-                          <p key={bullet} className="text-xs text-offwhite/50 flex items-start gap-2">
-                            <span className="text-phosphor/60 flex-shrink-0">{'>'}</span>
-                            <span>{bullet}</span>
-                          </p>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
+// Agent B receives
+const original = vgn.deobfuscate(secured, secret);
+// Returns: "Launch data analysis"`}</code></pre>
+              </div>
 
-                <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-                  <div className="terminal-box p-6 border-phosphor/30">
-                    <h3 className="text-sm font-bold text-phosphor mb-4">Security Guarantees</h3>
-                    <div className="space-y-3">
-                      {vectorGuardGuarantees.map((item) => (
-                        <p key={item} className="text-xs text-offwhite/60 flex items-start gap-2">
-                          <span className="text-phosphor flex-shrink-0">[+]</span>
-                          <span>{item}</span>
-                        </p>
-                      ))}
-                    </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
+                {nanoFeatures.map(({ label, detail }) => (
+                  <div key={label} className="terminal-box p-4">
+                    <p className="text-xs font-bold text-phosphor flex items-start gap-2">
+                      <span className="flex-shrink-0">[+]</span>
+                      {label}
+                    </p>
+                    <p className="text-[11px] text-offwhite/40 mt-1 ml-5">{detail}</p>
                   </div>
-                  <div className="terminal-box p-6">
-                    <h3 className="text-sm font-bold text-phosphor mb-4">Deployment Focus</h3>
-                    <div className="space-y-3">
-                      {vectorGuardUseCases.map(({ title, description }) => (
-                        <div key={title} className="bg-void/50 p-3 border border-phosphor/10">
-                          <p className="text-sm font-bold text-phosphor">{title}</p>
-                          <p className="mt-1 text-xs text-offwhite/40">{description}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+                ))}
+              </div>
 
-                <p className="mt-8 text-center text-xs text-offwhite/30">
-                  Provide mission parameters, performance data, and deployment milestones to extend the VectorGuard showcase with case studies and implementation visuals.
+              <div className="flex flex-wrap justify-center gap-4">
+                <a
+                  href="https://github.com/Active-IQ/VectorGuard-Nano"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-terminal-filled inline-flex items-center gap-2"
+                >
+                  <GitHubIcon className="h-4 w-4" />
+                  Clone Repository
+                </a>
+                <button
+                  type="button"
+                  onClick={() => {
+                    window.location.href = '/blog/vectorguard-nano.html';
+                  }}
+                  className="btn-terminal"
+                >
+                  Read Launch Announcement
+                </button>
+              </div>
+            </TerminalBox>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Comparison Section */}
+      <section id="comparison" className="py-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionDivider label="NANO vs FULL VECTORGUARD" />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <TerminalBox title="COMPARE.matrix">
+              <div className="overflow-x-auto">
+                <table className="w-full text-xs">
+                  <thead>
+                    <tr className="border-b border-phosphor/20">
+                      <th className="text-left py-3 pr-4 text-amber uppercase tracking-wider font-bold">Feature</th>
+                      <th className="text-left py-3 pr-4 text-phosphor uppercase tracking-wider font-bold">Nano (Free)</th>
+                      <th className="text-left py-3 text-phosphor uppercase tracking-wider font-bold">Full (Enterprise)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {comparisonRows.map(({ feature, nano, full }) => (
+                      <tr key={feature} className="border-b border-phosphor/5">
+                        <td className="py-3 pr-4 text-amber font-bold">{feature}</td>
+                        <td className="py-3 pr-4 text-offwhite/60">{nano}</td>
+                        <td className="py-3 text-offwhite/70">{full}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="mt-8 text-center">
+                <p className="text-sm text-offwhite/60 mb-4">
+                  Full VectorGuard is currently in private beta. We are seeking strategic partnerships with AI companies and enterprise customers.
                 </p>
+                <a
+                  href="mailto:raymondj@active-iq.com?subject=VectorGuard%20Enterprise%20Licensing"
+                  className="btn-terminal-filled inline-block"
+                >
+                  Contact for Enterprise Licensing
+                </a>
               </div>
-            </div>
+            </TerminalBox>
           </motion.div>
         </div>
       </section>
@@ -782,43 +619,43 @@ const Home = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="space-y-6"
             >
-              <div className="terminal-box p-6 space-y-4">
-                <div>
-                  <span className="text-amber text-xs uppercase tracking-wider">$ location</span>
-                  <p className="text-sm text-offwhite/80 mt-1">Warden, WA 98857</p>
-                </div>
-                <div>
-                  <span className="text-amber text-xs uppercase tracking-wider">$ phone</span>
-                  <p className="text-sm mt-1">
-                    <a href="tel:+15095189923" className="text-offwhite/80 hover:text-phosphor transition-colors">+1 (509) 518-9923</a>
-                  </p>
-                </div>
-                <div>
-                  <span className="text-amber text-xs uppercase tracking-wider">$ email</span>
-                  <p className="text-sm mt-1">
-                    <a href="mailto:raymondj@active-iq.com" className="text-offwhite/80 hover:text-phosphor transition-colors">raymondj@active-iq.com</a>
-                  </p>
-                </div>
-                <div>
-                  <span className="text-amber text-xs uppercase tracking-wider">$ certifications</span>
-                  <p className="text-xs text-offwhite/60 mt-1">CJIS Level 4 · CompTIA A+ · Dell Certified Technician · Microsoft Windows 2000 Advanced Server</p>
-                </div>
-                <div>
-                  <span className="text-amber text-xs uppercase tracking-wider">$ links</span>
-                  <div className="mt-2 flex gap-4">
-                    <a href="https://github.com/Active-IQ" className="text-offwhite/50 hover:text-phosphor transition-colors flex items-center gap-2 text-xs" target="_blank" rel="noopener noreferrer">
-                      <GitHubIcon className="h-4 w-4" />
-                      [GITHUB]
-                    </a>
-                    <a href="https://www.linkedin.com/in/raymondjohnson" className="text-offwhite/50 hover:text-phosphor transition-colors flex items-center gap-2 text-xs" target="_blank" rel="noopener noreferrer">
-                      <LinkedInIcon className="h-4 w-4" />
-                      [LINKEDIN]
-                    </a>
+              <TerminalBox title="ACTIVE-IQ.info">
+                <div className="space-y-5">
+                  <div>
+                    <span className="text-amber text-xs uppercase tracking-wider">$ organization</span>
+                    <p className="text-sm text-phosphor font-bold mt-1">Active-IQ Systems</p>
+                    <p className="text-xs text-offwhite/50 mt-1">Model-Bound Cryptography & AI Agent Security</p>
+                  </div>
+                  <div>
+                    <span className="text-amber text-xs uppercase tracking-wider">$ email</span>
+                    <p className="text-sm mt-1">
+                      <a href="mailto:raymondj@active-iq.com" className="text-offwhite/80 hover:text-phosphor transition-colors">raymondj@active-iq.com</a>
+                    </p>
+                  </div>
+                  <div>
+                    <span className="text-amber text-xs uppercase tracking-wider">$ repositories</span>
+                    <div className="mt-2 space-y-2">
+                      <a href="https://github.com/Active-IQ" className="text-offwhite/50 hover:text-phosphor transition-colors flex items-center gap-2 text-xs" target="_blank" rel="noopener noreferrer">
+                        <GitHubIcon className="h-4 w-4" />
+                        github.com/Active-IQ
+                      </a>
+                      <a href="https://github.com/Active-IQ/VectorGuard-Nano" className="text-offwhite/50 hover:text-phosphor transition-colors flex items-center gap-2 text-xs" target="_blank" rel="noopener noreferrer">
+                        <GitHubIcon className="h-4 w-4" />
+                        VectorGuard-Nano (MIT)
+                      </a>
+                    </div>
+                  </div>
+                  <div>
+                    <span className="text-amber text-xs uppercase tracking-wider">$ inquiries</span>
+                    <div className="mt-2 space-y-1 text-xs text-offwhite/50">
+                      <p>{'>'} Enterprise licensing & VectorGuard Full access</p>
+                      <p>{'>'} Strategic partnerships & integration</p>
+                      <p>{'>'} Security consulting & performance engineering</p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </TerminalBox>
             </motion.div>
 
             <motion.div
@@ -828,9 +665,9 @@ const Home = () => {
               viewport={{ once: true }}
             >
               <TerminalBox title="CONTACT.form">
-                <h3 className="text-lg font-bold text-phosphor mb-2">Send a Message</h3>
+                <h3 className="text-lg font-bold text-phosphor mb-2">Get in Touch</h3>
                 <p className="text-xs text-offwhite/50 mb-6">
-                  Share project requirements, collaboration ideas, or speaking opportunities.
+                  Licensing inquiries, partnership proposals, or technical questions.
                 </p>
                 <form className="space-y-4">
                   <div>
@@ -866,7 +703,7 @@ const Home = () => {
                       name="message"
                       rows={4}
                       className="w-full bg-void border border-phosphor/20 px-3 py-2 text-sm text-offwhite placeholder-offwhite/30 focus:border-phosphor focus:outline-none transition-colors resize-none"
-                      placeholder="How can I help?"
+                      placeholder="Describe your use case or inquiry..."
                     />
                   </div>
                   <button type="submit" className="btn-terminal-filled w-full">
@@ -888,9 +725,13 @@ const Home = () => {
               <a href="https://github.com/Active-IQ" className="text-offwhite/30 hover:text-phosphor transition-colors text-xs" target="_blank" rel="noopener noreferrer">
                 [GITHUB]
               </a>
-              <a href="https://www.linkedin.com/in/raymondjohnson" className="text-offwhite/30 hover:text-phosphor transition-colors text-xs" target="_blank" rel="noopener noreferrer">
-                [LINKEDIN]
-              </a>
+              <button
+                type="button"
+                onClick={() => navigate('/blog')}
+                className="text-offwhite/30 hover:text-phosphor transition-colors text-xs"
+              >
+                [BLOG]
+              </button>
             </div>
           </div>
         </div>
@@ -903,7 +744,6 @@ const App = () => (
   <Router>
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/whitepaper" element={<Whitepaper />} />
       <Route path="/blog" element={<Blog />} />
     </Routes>
   </Router>
