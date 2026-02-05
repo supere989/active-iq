@@ -13,7 +13,7 @@
     "electron": "electron .",
     "electron-dev": "concurrently \"npm run dev\" \"wait-on http://localhost:5173 && electron .\"",
     "icons": "node scripts/generate-icons.js",
-    "dist": "npm run icons && npm run build && electron-builder --publish=never --linux AppImage"
+    "dist": "npm run icons && npm run build && electron-builder --publish=never"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.3",

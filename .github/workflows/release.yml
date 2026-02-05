@@ -17,6 +17,6 @@ jobs:
         node-version: '18'
     - run: npm ci
     - run: npm run build
-    - run: npm run dist
+    - run: npm run dist -- --publish always
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
