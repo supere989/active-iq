@@ -1,6 +1,6 @@
-# Personal Website
+# Active-IQ
 
-A modern and responsive personal website for Raymond Johnson.
+Intelligent Automation & Security Architecture.
 
 ## Features
 

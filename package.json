@@ -1,7 +1,7 @@
 {
-  "name": "personal-website",
+  "name": "active-iq",
   "version": "1.0.4",
-  "description": "Raymond Johnson's personal website and desktop showcase",
+  "description": "Active-IQ: Intelligent Automation & Security Architecture",
   "author": "Raymond Johnson <supere989@gmail.com>",
   "private": true,
   "main": "main.cjs",
@@ -38,8 +38,8 @@
     "wait-on": "^9.0.1"
   },
   "build": {
-    "appId": "com.raymondjohnson.personalwebsite",
-    "productName": "Personal Website",
+    "appId": "com.active-iq.desktop",
+    "productName": "Active-IQ",
     "directories": {
       "output": "dist-electron"
     },
