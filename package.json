@@ -1,0 +1,84 @@
+{
+  "name": "personal-website",
+  "version": "1.0.4",
+  "description": "Raymond Johnson's personal website and desktop showcase",
+  "author": "Raymond Johnson <supere989@gmail.com>",
+  "private": true,
+  "main": "main.cjs",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "electron": "electron .",
+    "electron-dev": "concurrently \"npm run dev\" \"wait-on http://localhost:5173 && electron .\"",
+    "icons": "node scripts/generate-icons.js",
+    "dist": "npm run icons && npm run build && electron-builder --publish=never --linux AppImage"
+  },
+  "dependencies": {
+    "@heroicons/react": "^2.1.3",
+    "@react-three/drei": "^9.122.0",
+    "@react-three/fiber": "^8.15.21",
+    "framer-motion": "^11.5.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^7.9.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.2",
+    "autoprefixer": "^10.4.20",
+    "concurrently": "^9.2.1",
+    "electron": "^39.0.0",
+    "electron-builder": "^26.0.12",
+    "icon-gen": "^5.0.0",
+    "postcss": "^8.4.41",
+    "sharp": "^0.34.4",
+    "tailwindcss": "^3.4.13",
+    "vite": "^5.4.1",
+    "wait-on": "^9.0.1"
+  },
+  "build": {
+    "appId": "com.raymondjohnson.personalwebsite",
+    "productName": "Personal Website",
+    "directories": {
+      "output": "dist-electron"
+    },
+    "files": [
+      "dist/**/*",
+      "main.cjs"
+    ],
+    "linux": {
+      "target": [
+        "AppImage",
+        "snap"
+      ],
+      "category": "Utility",
+      "icon": "build/icons/icon.png"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "build/icons/icon.ico"
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "category": "public.app-category.productivity",
+      "icon": "build/icons/icon.icns"
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
