@@ -1,0 +1,485 @@
+Raymond Johnson
+Cloud systems architect - AI Systems Integration
+Warden, WA 98857
+supere989@gmail.com
++1 509 518 9923
+
+Professional Summary
+Analytically minded Information Technology and Management professional, advancing skills needed to
+bridge gaps between technology and commercial operations while developing innovative solutions to
+increase business efficiency having evaluated technology’s role within business. Academic achievements
+are underpinned by professional experience in diverse arenas, including a specialist global provider
+of Blockchain and Cryptocurrency advisory and marketing services. Strong cultural awareness and
+multilingual skills (English / Spanish / French) gained via a unique mix of international experience. Enjoys
+maintaining awareness of new and emerging technology, including design thinking, cognitive computing
+and Internet of Things (IoT).
+Currently immersed in AI technologies and unique application scenarios
+Authorized to work in the US for any employer
+
+Work Experience
+IT Technician Tier III
+
+Devfuzion IT, Marketing & Design-Kennewick, WA
+October 2018 to Present
+Full-Service MSP Support at Tier 3 Level.
+Microsoft 365 administration, active directory hybrid management
+ChatGPT and like AI Model Prompt Engineering
+Offline AI agent integration
+Localized server management with remote monitoring
+Firewall support of Cisco Meraki, Sophos, Sonic Wall
+Site to site VPN management
+Remote desktop services management
+Printer server Management
+Desktop application support
+Desktop engineering with Group policy
+Active directory Domain security and auditing
+Cloud application integrations
+SQL server Management
+
+Blockchain/Fintech Infrastructure Engineer
+Motive IQ-Kennewick, WA
+June 2016 to September 2018
+
+Project Management
+Integrated Linux systems administration
+
+Automated startup and process recovery
+Diskless Boot Configurations
+Remote management via SSH and RSA Key Pairs
+Manage Inventory
+Create Project Plans and Deliver to management in conference format
+Cost Estimated and Materials Management
+Policy and Procedure writing
+Technical Writing
+Software development
+
+Data Center Operations Technician
+CompuCom / Amazon-Umatilla, OR
+February 2016 to May 2016
+
+Daily duties included:
+Routinely review ticket queue for large events and address accordingly
+Self optimize daily ticket workload for maximum effectiveness and time management
+Coordinate change management resource
+Guide, train and educate data staff on the best practices related to all service owner issues
+Recommend, document, and oversee policies and procedures to meet industry best practices and to
+meet required SLAs, Security Guidelines, Personnel and Data security, Mobile Device awareness and
+Physical Information security. Personnel Challenge within secured areas.
+Own-The-Process task fulfillment in daily functions
+Perform routine Area Cleanup and workstation optimization
+Submit supply requisitions for consumables used in the course of daily activities
+Perform Emergency Equipment Repairs to meet SLA requirements
+
+Tier 2 Helpdesk Technician
+
+TcT Computer Systems-Kennewick, WA
+June 2015 to September 2015
+• Provide in person, telephone, and remote support for contract customers on commercial and private
+networks.
+• Perform hardware diagnostics and repairs
+• Install, support, and troubleshoot software and hardware
+• Create, manage, and delete email accounts and AD user profiles in coordination with employee
+onboarding, tasking and leaving
+• Managing workstation accounts in Active Directory
+• Imaging of workstations for new users and lifecycle replacements in coordination with property issuance
+division
+• Supporting Windows 10 Deployment
+• Cooperation with other technicians and teams within and without division on projects
+affecting agency operations
+• Ensure proper configuration and operation of host-based security systems on deployed
+workstations.
+• Assist in training new employees and developing processes and procedures
+Responsible for creation, modification, and deletion of user accounts and mailboxes.
+
+Desktop Support Engineer
+Apex Systems-Pasco, WA
+February 2014 to May 2015
+
+I provide Desktop Support Services ranging from PC setup and design to Mobile infrastructure. I am
+responsible for maintaining performance SLA's while providing Professional Class Customer
+
+service. I maintain a Desktop infrastructure of over 700 devices. Typical Duties include end user software
+support, troubleshooting of desktop software problems, Email issues, virus remediation.
+Also break/fix of Desktop PC's and attached peripherals: Scanner, Video Cameras, Uninterruptible power
+supplies. Deployment and Support of Wyse Managed Virtual Devices in the Medical environment and
+its related software. Maintain Performance measurements of the Managed Virtual Devices to ensure
+QoS Standards are being met by Server infrastructure. Responds to and diagnoses problems through
+discussions with end-users.
+Ensures a timely process through which problems are controlled. Including problem recognition, research,
+isolation, resolution, and follow-up steps. Provides support to end users on a variety of issues and
+serves as focal point for customer concerns. Identify, research, and resolve technical problems. Responds
+to telephone calls, email and personnel requests for technical support. Document, track, and monitor
+problems to ensure a timely resolution. Provides second-tier support to end users for either PC, server, or
+mainframe applications or hardware. Interact with network services, software systems engineering, and/
+or applications development to restore service and/or identify and correct core problem. Simulates or
+recreates user problems to resolve operating difficulties. Recommends systems modifications to reduce
+user problems.
+
+Senior Operations Manager
+Superior Dynamics-Kennewick, WA
+February 2013 to February 2014
+
+Managed and oversaw the planning, development and construction of high performance parallel
+computing. Responsible for architectural design of GPU Data processing blocks across a distributed
+computing network connecting to multiple host nodes. Responsible for maintaining adequate cooling
+systems for 99.999% uptime reliability, thermal monitoring and rapid response repair scenarios.
+Organized hardware inventory and Warranty returns with multiple retail vendors and maintained cost
+effective purchase ordering. Designed Proprietary Computing platforms to host multi PCI Express GPU
+adapters including prototype construction and proof of concept testing. Managed and modified multiple
+software platforms i.e.: Direct-Compute, OpenCL, QT, Java, Linux, Windows and many other ASIC based
+microprocessor platforms. Generated reports on platform efficiency in hashes per second / kilowatt of
+power required and cross compared different GPU platforms for heat and power efficiency. Performed
+quality testing on new Crypto-Currency algorithms on Nvidia, AMD,
+Intel, Butterfly Labs, and many other ASIC SHA1 cryptography processors.
+
+Education
+Computer Science - Cyber Security (Cyber Security AA)
+Columbia Basin College-Pasco, WA
+January 2017 to April 2017
+
+Windows 2000 Advanced Server Training (Certificate of Completion)
+Keene IT-Kirkland, WA
+January 2000 to February 2000
+
+Computer and Information Sciences (Diploma)
+Republic High School-Republic, WA
+September 1993 to June 1995
+
+Middle School (International Study)
+B.C.S.S-Midway, BC, Canada
+September 1991 to June 1992
+
+High school diploma or GED
+Artificial Intelligence (Doctoral degree)
+
+Skills
+• Drafting
+• Integration testing
+• Project management
+• Windows 7 (10+ years)
+• Equivalence partitioning
+• Management
+• .NET Core
+• Bitcoin (2 years)
+• Oracle
+• MLOps (2 years)
+• TypeScript
+• macOS
+• ASME codes & standards
+• Microsoft Office 2016 Certified (2 years)
+• Vulnerability scanning
+• System operation design
+• Ethereum (1 year)
+• Python
+• Cisco VoIP / Video Conferencing (2 years)
+• Mentoring
+• Scrum Master experience
+• SFTP
+• Bash
+• Google Cloud Platform
+• PowerShell
+• Docker
+• Blockchain physical infrastructure Design (5 years)
+• Meraki VPN mangement
+• Azure Cloud
+• Fiber Optic Troublshooting (1 year)
+• Databases
+• UFW
+• Data structures
+• LAMP stack
+• Advanced Microsoft Excel Data Analytics (3 years)
+
+• Synology Diskstation
+• SELinux
+• Office 365 / Exchange Administration (2 years)
+• DHCP (4 years)
+• Windows Vista (4 years)
+• Data Center Operations Engineer (2 years)
+• Web services
+• Kubernetes
+• Logistics (2 years)
+• Azure AD Hybrid Management
+• SQL Server Management Studio
+• C#
+• S3
+• Load Testing
+• AI (1 year)
+• SIEM
+• Splunk
+• Vmware (4 years)
+• MariaDB
+• Performance testing
+• Windows
+• Stress Testing
+• Software QoS / Integration for Desktop Deployment (5 years)
+• Linux
+• Working with high schoolers
+• OPNSense
+• Team lead experience
+• Inventory Management (10+ years)
+• Azure
+• Natural language processing
+• SSH
+• AWS Automated Server Deployment (Datacenter) (1 year)
+• Remedy CRM (2 years)
+• Systems integration
+• System & application engineer team management
+• Cloud Computing (8 years)
+• Wireless Data Networking (8 years)
+• MySQL
+• IT experience within healthcare
+• AutoCAD
+
+• Windows XP (10+ years)
+• Revenue cycle management
+• Bug rate reduction - Bug rate reduction (21-30%)
+• Performance optimization
+• BlockChain Security Analyst (6 years)
+• QBasic 3.0 Programming (Less than 1 year)
+• Boundary value analysis
+• Salesforce
+• GitLab
+• APIs
+• Time management
+• Disaster recovery
+• Solidity (Less than 1 year)
+• Root cause analysis
+• C++ Code Compiling (2 years)
+• Leadership
+• Sanity Testing
+• mongoDB
+• System troubleshooting
+• IaaS
+• Data model design
+• Wireless Network Systems Design (4 years)
+• Meraki MDM
+• Arch LInux
+• openSUSE
+• Spanish Language (2 years)
+• Javascript Programming (Less than 1 year)
+• Scripting
+• Regression testing
+• Windows 8/8.1 (6 years)
+• Big data
+• Identity & access management
+• C++ (2 years)
+• Configuration management
+• Windows Server 2012 R2 (2 years)
+• Windows 2000 Advanced Server (3 years)
+• Vultr Cloud Server Administration (1 year)
+• Digital Ocean Cloud
+• Vultr Cloud
+• Crypto Currency Software Deployment (1 year)
+
+• Budgeting
+• Full Stack Development (1 year)
+• Microsoft Access
+• French Language (Less than 1 year)
+• Firewall IPS and Network Mesh Administration (Ubiquity) (7 years)
+• WCF
+• 45+ WPM Typing Skills (10+ years)
+• Vue.js
+• SQL (2 years)
+• React
+• RESTful API
+• Pascal Programming (Apple Computer) (2 years)
+• Data visualization software proficiency
+• Clarify CRM (2 years)
+• Windows Server 2008 R2 (2 years)
+• Power BI
+• Android
+• DynamoDB
+• UNIX
+• GraphQL
+• Microsoft SQL Server (2 years)
+• C
+• Embedded Linux Design (4 years)
+• Linux Server (6 years)
+• Linux Systems Administration (6 years)
+• Technical Support (10+ years)
+• NodeJS Web Service Administration (1 year)
+• SCCM
+• Less
+• IIS
+• Service Now (2 years)
+• Azure AD Migration
+• Static Testing
+• Active Directory (6 years)
+• Software development product manager experience
+• Smoke testing
+• Coverage Measurement Testing
+• PostgreSQL
+• Google Workspace / Microsoft 365 Integration
+• .NET
+
+• Windows 10 (4 years)
+• Blockchain Asset management (3 years)
+• Ansible
+• Windows Desktop Group Policy
+• Redundant Network Fabric Architecture Design (1 year)
+• Linux Penetration Testing (10+ years)
+• Microsoft Office 365 Cloud Management - Exchange Migration (1 year)
+• DevOps
+• Juniper Fiber Optics Aggregation (1 year)
+• IDS
+• Communication skills
+• gRPC
+• Web App Server Services
+• AWS VPN Server Administrator (4 years)
+• Python Programming (2 years)
+• OSPF
+• Supply Chain
+• Linux Server Clustering and Failover (5 years)
+• BlockChain Systems Engineer (6 years)
+• Windows Small Business Server 2003 (2 years)
+• Procurement (8 years)
+• Cost reduction by process optimization - Cost reduction by process optimization ($500K-$1M)
+• Spark
+• User acceptance testing
+• Product owner experience
+• Operations management
+• Bitvise Client
+• BlockChain Infrastructure Design Engineer (Data Center Scale) (4 years)
+• AWS Cloud
+• Network Engineering
+• WAN Security
+• MSDOS 2.1/3.0/3.1/4.0/5.0/6.0/6.22 (10+ years)
+• Software development
+• Java
+• Conflict management
+• Cisco Meraki
+• Qubes Linux
+• Solution architecture
+• phpMyAdmin Database Management
+• User management - Largest daily user count managed (1-100 users)
+
+• IT service management
+• Operating Systems (10+ years)
+• DICOM
+• System performance metrics improvement - System performance metrics improved (More than 35%)
+• Mainframe development
+• Citrix
+• Heavy lifting
+• BGP
+• EMR/EHR
+• Data systems development
+• Machine learning (1 year)
+• System development architect experience
+• WAN (6 years)
+• Scrum
+• Customer service
+• Load balancing
+• Lua
+• VMWare Virtualization (2 years)
+• NIST standards
+• DNS (4 years)
+• LC / SC (SM/MM) Fiber Optics Technician (2 years)
+• Malware analysis
+• Group Policy management
+• PACS Server replication management (2 years)
+• Office 365 Exchange Security Hardening (4 years)
+• Windows 3.1 + (10+ years)
+• Terraform
+• Telecom VoIP Systems Administration / SIP Admin (2 years)
+• Network Support (8 years)
+• C++ (Less than 1 year)
+• HTML5
+• Routing protocols
+• Design patterns
+• SharePoint
+• 2D animation
+• Data modeling projects
+• Automated Windows OS Deployment (5 years)
+• Cloud infrastructure
+• Redux
+• Database Management (10+ years)
+
+• CAD
+• WordPress Web Administration (2 years)
+• HyperScript Programming (Apple Computer) (2 years)
+• Inventory Control (10+ years)
+• BlockChain Super Computer Cluster Engineer (6 years)
+• Linux Desktop (6 years)
+• XML
+• Shell Scripting (4 years)
+• AWS Cloud server Administration (2 years)
+• Electrical experience
+• Microsoft Server Control Center Management (2 years)
+• Remote Access Software (8 years)
+• TCP/IP (10+ years)
+• BlockChain Server Administrator (6 years)
+• PyTorch
+• LAN (10+ years)
+• Software development tech lead
+• Organizational skills
+• Project budget management - Project budget managed ($1-$500,000)
+• Application development
+• Jupyter
+• Business analysis
+• SAN
+• Automated Linux Code Compiling via Source Repositories (ie: Github) (1 year)
+• Symantec Endpoint Security (Dell Trained) (2 years)
+• Front-end development
+• Database software proficiency
+• Supply chain management
+• Analysis skills
+• Cisco / Avaya Network Administration (2 years)
+• Ubiquity Cloud Managed Network Administration (4 years)
+• UI Testing
+• Linux Custom Kernel engineer (Less than 1 year)
+• SQLite
+• Systems engineering
+• Automation
+• QT Software Building (2 years)
+• iOS
+• Redis
+• Web Application Security Testing
+
+• Software development project manager experience
+• Fault Injection Testing
+• System performance monitoring
+
+Awards
+Excellence In Customer Service
+May 2000
+
+98% Customer satisfaction Rating - Awarded by Microsoft
+
+Certifications and Licenses
+CJIS Level 4
+October 2024
+
+CompTIA A+
+
+April 2014 to April 2017
+90 Minute Exam Completed in 24 Minutes with 94%
+
+Dell Certified Technician (Desktop, Portable, Server, Printer)
+April 2014 to April 2016
+
+Dell Repair Technician Certification for All available hardware platforms
+
+Microsoft Windows 2000 Advanced Server Certification
+January 2000 to January 2002
+
+Windows Server Administration Certificate - Trained by Microsoft via Contractor Agreements and Certified
+by Microsoft Internally.
+
+Hughes Network Internet Satellite Installer
+June 1997 to June 1999
+
+Hughes Network Systems Consumer internet provider installation
+
+Certified Pegasys Satellite Data systems Installer
+June 1997 to June 1999
+
+Broadband Satellite installer for PegaSYS Data systems
+
+DirectPC Certified Satellite Installer
+June 1997 to June 1999
+
+Direct TV Division for Consumer grade Satellite Internet Systems installation
+
+Driver's License
+
+
