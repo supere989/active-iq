@@ -1,0 +1,48 @@
+{
+    "name": "active-iq",
+    "private": true,
+    "version": "1.0.6",
+    "type": "module",
+    "main": "dist-electron/main.js",
+    "description": "Active-IQ Intelligent Automation Platform",
+    "author": "Active-IQ",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview",
+        "electron-dev": "concurrently \"npm run dev\" \"wait-on http://localhost:5173 && electron .\"",
+        "electron-build": "vite build && electron-builder",
+        "dist": "npm run build && electron-builder --linux --win --mac"
+    },
+    "dependencies": {
+        "@heroicons/react": "^2.0.18",
+        "@react-three/drei": "^9.88.0",
+        "@react-three/fiber": "^8.15.10",
+        "framer-motion": "^10.16.4",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-router-dom": "^6.18.0",
+        "three": "^0.158.0"
+    },
+    "devDependencies": {
+        "@types/react": "^18.2.37",
+        "@types/react-dom": "^18.2.15",
+        "@vitejs/plugin-react": "^4.2.0",
+        "autoprefixer": "^10.4.16",
+        "concurrently": "^8.2.2",
+        "electron": "^27.1.0",
+        "electron-builder": "^24.9.1",
+        "eslint": "^8.53.0",
+        "eslint-plugin-react": "^7.33.2",
+        "eslint-plugin-react-hooks": "^4.6.0",
+        "eslint-plugin-react-refresh": "^0.4.4",
+        "postcss": "^8.4.31",
+        "tailwindcss": "^3.3.5",
+        "vite": "^5.0.0",
+        "wait-on": "^7.1.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/supere989/active-iq.git"
+    }
+}
