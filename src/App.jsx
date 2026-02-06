@@ -32,61 +32,61 @@ const latestBlogPosts = [
 const coreComponents = [
   {
     symbol: '[HELIX]',
-    title: 'Helix Protocol & EMDM',
-    description: 'Bilateral Euclidean Mean Derivation Measurement exchange between two AI models. Helix captures runtime activations, pairs them with model anchors, and samples Euclidean vectors at 25%, 50%, and 75% intervals to produce shared FP32 digit streams.',
+    title: 'Helix Protocol',
+    description: 'Proprietary bilateral key agreement protocol between two AI models. Both sides derive shared cryptographic material from their own model state -- no classical key exchange required.',
     bullets: [
-      'Session-initialization prompts capture FP32 activation tensors for selected layers',
-      'Constructs 32-column x 64-row tables transposed into (x,y,z) triplet tuples',
-      'Both models exchange EMDM samples to derive a shared VectorStream digit reservoir',
+      'Session-bound: each communication generates unique cryptographic material',
+      'Bilateral: both models contribute entropy to the shared stream',
+      'Model-native: leverages internal model representations as the security foundation',
     ],
   },
   {
     symbol: '[KEY]',
     title: 'VectorGuard Key Derivation',
-    description: 'Forward-processing algorithm that generates cryptographic material from structured neural data. Baseline weights form Cloud A anchors; runtime activations form Cloud B entropy points.',
+    description: 'Generates cryptographic primitives directly from AI model internals. The model itself becomes the key -- no external key management infrastructure required.',
     bullets: [
-      'Maps weight and activation data into 3D point clouds using permutation-indexed tables',
-      'Deterministic: identical model weights and prompts reproduce identical layouts',
-      'Unidirectional transformation \u2014 weights to keys, never reversed',
+      'Deterministic: identical model instances produce identical security surfaces',
+      'Unidirectional: model data transforms to keys, never reversed',
+      'Scales with model complexity: larger models yield exponentially greater security',
     ],
   },
   {
     symbol: '[LOCK]',
     title: 'VectorLock Encryption',
-    description: 'Multi-layered data encryption using Helix-derived key material. Bytes route through a 3x3x3 Rubik\'s Cube style lattice permutation keyed by model anchors before XOR layers.',
+    description: 'Multi-layered data encryption system using model-derived key material. Binds encrypted data to user identity, model identity, and session state simultaneously.',
     bullets: [
-      'Layer 1: Identity entropy binds encryption to user identity',
-      'Layer 2: 24-bit model fingerprint indices bind to model structure',
-      'Layers 3\u20135: Anchor rotations, weight values, and position mixing prevent pattern analysis',
+      'Identity-bound: encryption tied to specific user and model instances',
+      'Multi-layer architecture prevents pattern analysis across all attack surfaces',
+      'Perfectly reversible with correct parameters, computationally infeasible without',
     ],
   },
   {
     symbol: '[FLOW]',
     title: 'VectorFlow Stream Generation',
-    description: 'Consumes the shared digit reservoir to deliver synchronized cypher streams. Sliding-window consumption guided by the first 256 Helix headers, mixing digits with modular arithmetic.',
+    description: 'Produces synchronized cypher streams consumed by both communicating models. Session-unique streams are destroyed automatically on completion.',
     bullets: [
       'Session-bound cypher stream synchronized across both models',
-      'Creates session-unique streams destroyed automatically on completion',
-      'Maintains server blindness \u2014 intermediaries never see intelligible data',
+      'Automatic stream destruction ensures perfect forward secrecy',
+      'Server blindness: network intermediaries never see intelligible data',
     ],
   },
   {
     symbol: '[STREAM]',
-    title: 'VectorStream Token Application',
-    description: 'Applies VectorFlow cypher stream primitives to tokenizer token output values during AI-to-AI transmission. Each token position references specific table, anchor, and sample metadata.',
+    title: 'VectorStream Token Protection',
+    description: 'Applies cypher stream protection to AI model token outputs during transmission. Ensures each token is cryptographically bound to the session.',
     bullets: [
-      'Token IDs converted to digit sequences and mixed with VectorStream digits',
-      'Digit-wise modular addition plus conditional XOR with model-derived entropy',
-      'Prevents replay or reordering attacks through calculation-order alignment',
+      'Prevents replay, reordering, and injection attacks',
+      'Token-level granularity with session-specific protection',
+      'Lockstep encoding/decoding ensures perfect message recovery',
     ],
   },
 ];
 
 const securityProperties = [
-  'Model-bound: cypher streams tied to specific model instances, table selections, and prompt templates',
-  'Session isolation: each Helix exchange regenerates VectorStream headers and reservoirs',
-  'Session-limited decodability: VectorStream data destroyed when headers are exhausted',
-  'Server blindness: network intermediaries cannot decrypt without matching Helix envelopes',
+  'Model-bound: cypher streams tied to specific AI model instances',
+  'Session isolation: each session generates entirely new cryptographic material',
+  'Session-limited decodability: cryptographic data destroyed when session completes',
+  'Server blindness: network intermediaries cannot decrypt without the originating models',
   'Perfect forward secrecy: no persistent keys stored between sessions',
   'Whisper Leak immune: no consistent traffic patterns for adversarial model training',
 ];
@@ -100,13 +100,13 @@ const nanoFeatures = [
 ];
 
 const comparisonRows = [
-  { feature: 'Method', nano: 'HMAC-SHA256 character shifting', full: 'Model-bound point cloud cryptography (Helix/EMDM)' },
-  { feature: 'Security Basis', nano: 'Pre-shared secrets', full: 'AI model weights + runtime activations' },
+  { feature: 'Method', nano: 'HMAC-SHA256 character shifting', full: 'Proprietary model-bound cryptography' },
+  { feature: 'Security Basis', nano: 'Pre-shared secrets', full: 'AI model internals (proprietary process)' },
   { feature: 'Performance', nano: 'Instant (CPU)', full: 'Billions of digits/second (CUDA)' },
   { feature: 'Whisper Leak', nano: 'Partial (timing patterns remain)', full: 'Complete immunity (no consistent patterns)' },
   { feature: 'Forward Secrecy', nano: 'No', full: 'Yes (context-driven rotation)' },
   { feature: 'Key Exchange', nano: 'Manual pre-shared', full: 'Automatic (model distribution = key distribution)' },
-  { feature: 'Session Management', nano: 'Manual timestamp', full: 'Automatic (Helix bilateral exchange)' },
+  { feature: 'Session Management', nano: 'Manual timestamp', full: 'Automatic (bilateral key agreement)' },
   { feature: 'Use Case', nano: 'Development, testing, casual use', full: 'Enterprise production, compliance' },
   { feature: 'License', nano: 'MIT (free)', full: 'Enterprise licensing' },
 ];
@@ -224,7 +224,7 @@ const BlogSplash = ({ onDismiss }) => {
         >
           <p className="text-offwhite/30 text-xs">
             Entering main terminal in <span className="text-phosphor font-bold">{countdown}</span>s
-            <span className="text-offwhite/20"> \u2014 click anywhere to skip</span>
+            <span className="text-offwhite/20"> -- click anywhere to skip</span>
           </p>
         </motion.div>
       </div>
@@ -331,7 +331,7 @@ const Home = () => {
               SYSTEMS
             </p>
             <p className="mt-8 text-base md:text-lg text-offwhite/70 leading-relaxed max-w-3xl mx-auto">
-              VectorGuard is a proprietary geometric obfuscation system that derives unbounded security surfaces from AI model fingerprints and temporal states. It enables secure, zero-trust AI-to-AI communication without traditional key exchange.
+              VectorGuard is a proprietary AI security platform that derives cryptographic material directly from AI model internals. It enables secure, zero-trust AI-to-AI communication without traditional key exchange -- the model itself is the key.
             </p>
             <div className="mt-10 flex flex-wrap justify-center gap-4">
               <button
@@ -391,7 +391,7 @@ const Home = () => {
                   </p>
                   <div className="space-y-2 text-xs text-offwhite/60">
                     <p className="flex items-start gap-2"><span className="text-phosphor flex-shrink-0">{'>'}</span> TLS encryption protects content but NOT metadata</p>
-                    <p className="flex items-start gap-2"><span className="text-phosphor flex-shrink-0">{'>'}</span> Current patches (padding, batching) add 2\u20133x bandwidth overhead</p>
+                    <p className="flex items-start gap-2"><span className="text-phosphor flex-shrink-0">{'>'}</span> Current patches (padding, batching) add 2-3x bandwidth overhead</p>
                     <p className="flex items-start gap-2"><span className="text-phosphor flex-shrink-0">{'>'}</span> Microsoft&apos;s own research: &quot;none provides complete protection&quot;</p>
                     <p className="flex items-start gap-2"><span className="text-phosphor flex-shrink-0">{'>'}</span> Affects ALL major LLM providers (OpenAI, Anthropic, Google, AWS)</p>
                   </div>
@@ -413,7 +413,7 @@ const Home = () => {
             VectorGuard operates as a pre-transport geometric obfuscation layer. The model itself is the key.
           </p>
           <p className="text-offwhite/40 mb-10 text-xs">
-            {'>'} Token embeddings \u2192 3D point clouds \u2192 Euclidean distance measurements \u2192 FP32 digit streams \u2192 Permutation cypher streams
+            {'>'} AI model internals -&gt; Geometric transformation -&gt; Bilateral key agreement -&gt; Cypher stream generation -&gt; Protected token transmission
           </p>
 
           {/* Communication Flow */}
@@ -428,14 +428,13 @@ const Home = () => {
               <h3 className="text-sm font-bold text-phosphor mb-4">AI-to-AI Communication Protocol</h3>
               <div className="space-y-1 text-xs text-offwhite/60 font-mono">
                 <p><span className="text-amber">[01]</span> Sender AI processes message through local model</p>
-                <p><span className="text-amber">[02]</span> Helix prompt seeds session entropy and captures FP32 activations</p>
-                <p><span className="text-amber">[03]</span> VectorGuard constructs B\u2081/T\u2099 tables, samples EMDM triplets, packages EMDM-A\u2081</p>
-                <p><span className="text-amber">[04]</span> Receiver runs reciprocal Helix sampling, returns EMDM-A\u2082</p>
-                <p><span className="text-amber">[05]</span> Both sides synchronize VectorStream headers from merged FP32 reservoir</p>
-                <p><span className="text-amber">[06]</span> VectorFlow draws digits from shared reservoir to encode token digits</p>
-                <p><span className="text-amber">[07]</span> VectorStream applies modular/XOR mixing, emits cypher-protected tokens</p>
-                <p><span className="text-amber">[08]</span> Receiver VectorStream consumes same headers to decode in lockstep</p>
-                <p><span className="text-amber">[09]</span> Receiver validates stream integrity and presents decrypted message</p>
+                <p><span className="text-amber">[02]</span> Helix protocol initiates bilateral key agreement between models</p>
+                <p><span className="text-amber">[03]</span> Both models derive shared cryptographic material from their own internal state</p>
+                <p><span className="text-amber">[04]</span> VectorFlow generates synchronized cypher streams on both sides</p>
+                <p><span className="text-amber">[05]</span> VectorStream applies cypher protection to outbound token data</p>
+                <p><span className="text-amber">[06]</span> Protected tokens transmitted through standard transport layer</p>
+                <p><span className="text-amber">[07]</span> Receiver decodes tokens in lockstep using matching cypher stream</p>
+                <p><span className="text-amber">[08]</span> Receiver validates stream integrity and presents decrypted message</p>
               </div>
             </TerminalBox>
           </motion.div>
