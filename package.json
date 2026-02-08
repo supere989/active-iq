@@ -17,6 +17,7 @@
     "electron": "electron .",
     "electron-dev": "concurrently \"npm run dev\" \"wait-on http://localhost:5173 && electron .\"",
     "icons": "node scripts/generate-icons.js",
+    "sync-blog": "node scripts/sync-moltbook.js",
     "dist": "npm run icons && npm run build && electron-builder"
   },
   "dependencies": {
