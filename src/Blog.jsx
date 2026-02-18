@@ -5,11 +5,11 @@ import { motion } from 'framer-motion';
 const blogPosts = [
   {
     slug: 'vectorguard-nano',
-    title: 'VectorGuard-Nano: Messaging Security for AI Agents',
-    date: 'February 9, 2026',
+    title: 'Introducing VectorGuard-Nano: Free Secure Messaging for AI Agents',
+    date: 'February 5, 2026',
     excerpt:
-      'Simple HMAC-based message obfuscation for AI agent communication. Free under Apache 2.0 for non-commercial use—a lightweight security layer for agent messaging on Moltbook, Discord, and beyond.',
-    tags: ['AI Security', 'Open Source', 'Apache 2.0'],
+      'The AI agent revolution is here, but there\'s a critical gap: no standard for secure agent-to-agent communication. Today we\'re releasing VectorGuard-Nano as free, MIT-licensed open-source software.',
+    tags: ['AI Security', 'Open Source', 'Product Launch'],
   },
 ];
 
@@ -35,7 +35,7 @@ const Blog = () => {
             <span>// BLOG</span>
           </div>
           <p className="text-sm text-offwhite/60 mb-12">
-            Updates on AI agent security, messaging obfuscation, and the VectorGuard ecosystem.
+            Updates on AI agent security, model-bound cryptography, and the VectorGuard Protocol.
           </p>
         </motion.div>
 
