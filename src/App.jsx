@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { HashRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import Blog from './Blog';
 import { motion } from 'framer-motion';
 import {
     AcademicCapIcon,
@@ -346,6 +347,7 @@ export default function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     {/* <Route path="/whitepaper" element={<Whitepaper />} /> */}
+                    <Route path="/blog" element={<Blog />} />
                 </Routes>
             </ThemeProvider>
         </Router>

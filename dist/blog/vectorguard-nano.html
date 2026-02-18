@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VectorGuard-Nano: Messaging Security for AI Agents | Active-IQ</title>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            background: #050505;
+            color: #e0e0e0;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+        h1 { color: #00ff00; border-bottom: 2px solid #00ff00; padding-bottom: 10px; }
+        h2 { color: #00ff00; margin-top: 30px; opacity: 0.9; }
+        a { color: #00ff00; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        code { background: #1a1a1a; padding: 2px 6px; border-radius: 3px; color: #ffaa00; }
+        pre { background: #1a1a1a; padding: 15px; border-radius: 5px; overflow-x: auto; border-left: 3px solid #00ff00; }
+        .meta { color: #666; font-size: 0.9em; margin-bottom: 30px; }
+        .tag { display: inline-block; background: #1a1a1a; border: 1px solid #00ff0033; padding: 2px 8px; margin-right: 8px; font-size: 0.8em; color: #00ff00; }
+        .warning { background: #1a0f00; border-left: 4px solid #ffaa00; padding: 10px 15px; margin: 20px 0; }
+        ul { list-style: none; padding-left: 0; }
+        ul li:before { content: '> '; color: #00ff00; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="meta">
+        <a href="/#/blog">&lt; Back to Blog</a><br>
+        February 9, 2026 | <span class="tag">AI Security</span><span class="tag">Open Source</span><span class="tag">Apache 2.0</span>
+    </div>
+
+    <h1>VectorGuard-Nano: Messaging Security for AI Agents</h1>
+    
+    <p>Simple HMAC-based obfuscation for AI agent messaging. Open-source under Apache 2.0 (free for non-commercial use).</p>
+
+    <div class="warning">
+        <strong>⚠️ Clear positioning:</strong> VectorGuard-Nano is <em>lightweight message obfuscation</em>, NOT enterprise-grade encryption. For production security with model-derived cryptography, see <a href="https://www.active-iq.com/vectorguard">VectorGuard Enterprise</a>.
+    </div>
+
+    <h2>What It Does</h2>
+    <p><strong>Deterministic string obfuscation</strong> using:</p>
+    <ul>
+        <li>HMAC-SHA256 for shift pattern generation</li>
+        <li>Shared secrets between agents</li>
+        <li>Timestamp/nonce binding</li>
+        <li>Reversible character shifting</li>
+    </ul>
+
+    <h2>Quick Start</h2>
+    <pre><code>import { secureSend, secureReceive } from './Vgn.js';
+
+// Agent A sends
+const payload = secureSend("Deploy model v2", "shared-secret", "agent-ops");
+
+// Agent B receives  
+const original = secureReceive(
+  payload.encoded,
+  "shared-secret", 
+  "agent-ops",
+  payload.timestamp
+);</code></pre>
+
+    <h2>Message Size Limits</h2>
+    <p><strong>Recommended:</strong> &lt; 1KB per message<br>
+    <strong>Maximum:</strong> ~4KB (technical limit)</p>
+
+    <h2>Good For</h2>
+    <ul>
+        <li>Agent chat on Moltbook, Discord, Telegram</li>
+        <li>Obfuscating commands in public logs</li>
+        <li>Prototype/demo applications</li>
+        <li>Learning agent security concepts</li>
+    </ul>
+
+    <h2>Not For</h2>
+    <ul>
+        <li>Financial transactions</li>
+        <li>Healthcare data (HIPAA)</li>
+        <li>Mission-critical production systems</li>
+        <li>Replacing TLS/HTTPS</li>
+    </ul>
+
+    <h2>Get Started</h2>
+    <p>
+        <strong>GitHub:</strong> <a href="https://github.com/Active-IQ/VectorGuard-Nano">github.com/Active-IQ/VectorGuard-Nano</a><br>
+        <strong>Enterprise:</strong> <a href="https://www.active-iq.com/vectorguard">active-iq.com/vectorguard</a><br>
+        <strong>Commercial License:</strong> sales@active-iq.com
+    </p>
+
+    <hr style="border: 0; border-top: 1px solid #00ff0033; margin: 40px 0;">
+    <p style="color: #666; font-size: 0.9em;">
+        <a href="/">Active-IQ</a> | <a href="/#/blog">Blog</a> | <a href="https://github.com/Active-IQ">GitHub</a>
+    </p>
+</body>
+</html>
