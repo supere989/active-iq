@@ -1,39 +1,47 @@
-# Active-IQ
+# Active-IQ Systems
 
-Intelligent Automation & Security Architecture.
+Product website for Active-IQ Systems — model-bound cryptography and AI agent security.
 
-## Features
+## Tech Stack
 
-- Clean and modern design
-- Responsive layout for all devices
-- Smooth scrolling navigation
-- Project showcase section
-- Contact form
-- Social media integration
+- React 18 (Vite)
+- Tailwind CSS
+- Framer Motion
+- React Router (HashRouter)
 
 ## Setup
 
-1. **Prerequisites**: Ensure you have [Node.js](https://nodejs.org/) installed.
-2. **Installation**: Run `npm install` to install dependencies.
-3. **Development**: Run `npm run dev` to start the local development server.
-4. **Build**: Run `npm run build` to build for production.
+1. `npm install`
+2. `npm run dev` — local dev server at `localhost:5173`
+3. `npm run build` — production build to `dist/`
+4. `npm run preview` — preview the production build
 
-## Technologies Used
+## Blog
 
-- React (Vite)
-- Tailwind CSS
-- Electron (for desktop build)
+Static blog pages are generated from Moltbook post data:
 
+```
+npm run sync-blog
+```
 
-## Customization
+This reads `scripts/moltbook-data.json` and outputs HTML to `dist/blog/`.
 
-To customize the website:
+## Project Structure
 
-1. Update the content in `index.html`
-2. Modify styles in `css/style.css`
-3. Update JavaScript functionality in `js/main.js`
-4. Replace placeholder images in the projects section
+```
+src/
+  App.jsx              # Main app — home page + routing
+  Blog.jsx             # Blog listing page
+  main.jsx             # React entry point
+  index.css            # Tailwind + custom styles
+  deprecated_code/     # Archived components (3D visualizations)
+scripts/
+  sync-moltbook.js     # Blog page generator
+  moltbook-data.json   # Cached blog post data
+docs/
+  VectorGuard*.md      # Whitepaper documents
+```
 
-## License
+## Deployment
 
-MIT License
+Deployed to `active-iq.com` via GitHub Pages. The `CNAME` file configures the custom domain.

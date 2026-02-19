@@ -1,14 +1,16 @@
-# VectorGuard Cryptographic System - Technology White Paper
+# VectorGuard Geometric Obfuscation System - Technology White Paper
 
 ## Executive Summary
 
-VectorGuard is a proprietary cryptographic system designed for secure AI-to-AI communication. The system derives cypher stream data from AI model weights and runtime activation entropy, binding cryptographic operations to specific model instances. Its Helix protocol orchestrates a bilateral Euclidean Mean Derivation Measurement (EMDM) exchange so two models can derive a shared permutation stream without shipping classical keys. VectorGuard employs a multi-layered approach combining Helix-derived VectorFlow stream generation and VectorStream token tumbling to protect tokenizer outputs during inter-AI transmission.
+VectorGuard is a proprietary geometric obfuscation system designed for secure AI-to-AI communication. The system derives permutation stream data from AI model weights and runtime activation entropy, binding obfuscation operations to specific model instances. Its Helix protocol orchestrates a bilateral Euclidean Mean Derivation Measurement (EMDM) exchange so two models can derive a shared permutation stream without shipping classical keys. VectorGuard employs a multi-layered approach combining Helix-derived VectorFlow stream generation and VectorStream token tumbling to protect tokenizer outputs during inter-AI transmission.
+
+**Important Distinction**: VectorGuard is not traditional cryptography. It provides a pre-transport geometric obfuscation layer that leverages the vast data diversity of AI model weights. The larger the AI model, the greater the security surface.
 
 ## Core Architecture
 
 ### VectorGuard Key Derivation
 
-VectorGuard implements a forward-processing algorithm that generates cryptographic material from structured neural data through the Helix protocol:
+VectorGuard implements a forward-processing algorithm that generates obfuscation stream material from structured neural data through the Helix protocol:
 
 **Input Processing:**
 - Source data: AI model weight parameters and runtime FP32 activations captured from session-seeded inference prompts
@@ -170,7 +172,7 @@ VectorStream applies VectorFlow cypher stream primitives to tokenizer token outp
 
 **AI Model Data as Infinite Entropy Source:**
 - AI models contain vast, unique data structures (38M+ parameters per model)
-- Each model instance represents a unique cryptographic primitive
+- Each model instance represents a unique obfuscation primitive
 - VectorGuard transforms this data into infinitely long cypher streams
 - Model identity data integrated into key tables binds cypher streams to running model instances
 - Temporal state encoding captures model execution context at encryption time
@@ -192,7 +194,7 @@ VectorStream applies VectorFlow cypher stream primitives to tokenizer token outp
 
 **Brute Force Protection:**
 - Theoretical infinite key combinations from model weight permutations
-- AI model data vastly exceeds traditional cryptographic key sizes
+- AI model data vastly exceeds traditional key sizes in combinatorial complexity
 - Computational infeasibility of reproducing exact model states
 - Session data destruction prevents replay attacks
 
@@ -200,12 +202,12 @@ VectorStream applies VectorFlow cypher stream primitives to tokenizer token outp
 - Keys require exact model weight reproduction and temporal state
 - Model architecture, weights, and execution context must match precisely
 - Weight quantization and model fingerprinting prevent impersonation
-- Tampering detection through cryptographic validation
+- Tampering detection through stream integrity validation
 
 **Session Security:**
 - Unique cypher stream generation per communication session
 - Session data automatically destroyed preventing key reuse
-- No persistent cryptographic material stored between sessions
+- No persistent stream material stored between sessions
 - Perfect forward secrecy through ephemeral session destruction
 
 ### Cryptographic Properties
@@ -249,4 +251,4 @@ VectorStream applies VectorFlow cypher stream primitives to tokenizer token outp
 
 ## Conclusion
 
-VectorGuard represents a novel cryptographic paradigm that leverages AI model structures as entropy sources for key derivation. By combining VectorFlow stream cipher generation with VectorStream token tumbling, the system provides comprehensive protection for AI-to-AI communications while maintaining the performance characteristics required for real-time applications. The model's weight-based keyspace of 496 trillion combinations, combined with multi-layer encryption and position-dependent keying, creates a cryptographically sound system uniquely adapted to the requirements of artificial intelligence communication protocols.
+VectorGuard represents a novel geometric obfuscation paradigm that leverages AI model structures as entropy sources for permutation stream derivation. By combining VectorFlow stream generation with VectorStream token tumbling, the system provides comprehensive pre-transport protection for AI-to-AI communications while maintaining the performance characteristics required for real-time applications. The security surface scales directly with model complexity — larger models yield exponentially more measurement pairs, making reverse engineering computationally infeasible. Combined with multi-layer obfuscation and position-dependent stream application, VectorGuard is uniquely adapted to the requirements of artificial intelligence communication protocols.

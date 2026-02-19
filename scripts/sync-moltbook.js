@@ -5,8 +5,12 @@
  * Generates static blog pages from moltbook-data.json
  */
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const DATA_FILE = path.join(__dirname, 'moltbook-data.json');
 const OUTPUT_DIR = path.join(__dirname, '../dist/blog');
@@ -34,7 +38,7 @@ function generatePostHTML(post) {
         <span class="text-offwhite/40 text-xs">${formatDate(comment.created_at)}</span>
       </div>
       <p class="text-sm text-offwhite/70">${comment.content.replace(/\\n/g, '<br/>').replace(/"/g, '&quot;')}</p>
-      ${comment.upvotes > 0 ? `<div class="text-xs text-phosphor/60 mt-2">↑ ${comment.upvotes}</div>` : ''}
+      ${comment.upvotes > 0 ? `<div class="text-xs text-phosphor/60 mt-2">\u2191 ${comment.upvotes}</div>` : ''}
     </div>
   `).join('\\n');
 
@@ -96,7 +100,7 @@ function generatePostHTML(post) {
         <div class="space-y-3">${commentsHTML}</div>
         <div class="terminal-box p-4 mt-6 text-center">
           <p class="text-sm text-offwhite/70 mb-3">Join the discussion on Moltbook</p>
-          <a href="${moltbookUrl}" target="_blank" 
+          <a href="${moltbookUrl}" target="_blank"
              class="inline-block bg-phosphor hover:bg-transparent text-void hover:text-phosphor border border-phosphor px-6 py-2 font-bold text-xs uppercase tracking-wider transition-colors no-underline">
             View on Moltbook
           </a>
@@ -124,8 +128,8 @@ function generateIndexHTML(posts) {
         <h2 class="text-xl font-bold text-phosphor mb-3">${post.title}</h2>
         <p class="text-sm text-offwhite/60 mb-4">${excerpt}</p>
         <div class="flex items-center gap-4 text-xs text-offwhite/40">
-          <span>↑ ${post.upvotes} upvotes</span>
-          <span>💬 ${post.comment_count} comments</span>
+          <span>\u2191 ${post.upvotes} upvotes</span>
+          <span>\ud83d\udcac ${post.comment_count} comments</span>
         </div>
       </a>`;
     }).join('\\n');
@@ -158,21 +162,21 @@ function generateIndexHTML(posts) {
 
 // Main
 try {
-    console.log('Generating blog pages from cached data...\\n');
+    console.log('Generating blog pages from cached data...\n');
     const data = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
     const posts = data.posts;
 
     posts.forEach(post => {
         const html = generatePostHTML(post);
         fs.writeFileSync(path.join(OUTPUT_DIR, `${post.id}.html`), html);
-        console.log(`✓ Generated ${post.id}.html`);
+        console.log(`Generated ${post.id}.html`);
     });
 
     const indexHTML = generateIndexHTML(posts);
     fs.writeFileSync(path.join(OUTPUT_DIR, 'index.html'), indexHTML);
-    console.log(`✓ Generated index.html`);
+    console.log(`Generated index.html`);
 
-    console.log(`\\n✓ Complete! Generated ${posts.length} blog pages.`);
+    console.log(`\nComplete! Generated ${posts.length} blog pages.`);
 } catch (error) {
     console.error('Error:', error.message);
     process.exit(1);

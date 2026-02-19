@@ -22,7 +22,7 @@ const latestBlogPosts = [
     title: 'Introducing VectorGuard-Nano: Free Secure Messaging for AI Agents',
     date: 'February 5, 2026',
     excerpt:
-      'The AI agent revolution is here, but there\'s a critical gap: no standard for secure agent-to-agent communication. Today we\'re releasing VectorGuard-Nano as free, MIT-licensed open-source software.',
+      'The AI agent revolution is here, but there\'s a critical gap: no standard for secure agent-to-agent communication. Today we\'re releasing VectorGuard-Nano as Apache 2.0-licensed open-source software, free for personal and educational use.',
     tags: ['AI Security', 'Open Source', 'Product Launch'],
   },
 ];
@@ -33,82 +33,86 @@ const coreComponents = [
   {
     symbol: '[HELIX]',
     title: 'Helix Protocol',
-    description: 'Proprietary bilateral key agreement protocol between two AI models. Both sides derive shared cryptographic material from their own model state -- no classical key exchange required.',
+    description: 'Bilateral cipher stream derivation between two AI models. Both sides independently build geometric representations from their own weights and activations, exchange measurements, and derive a shared cipher stream — no keys exist or are transmitted.',
     bullets: [
-      'Session-bound: each communication generates unique cryptographic material',
-      'Bilateral: both models contribute entropy to the shared stream',
-      'Model-native: leverages internal model representations as the security foundation',
+      'Session-bound: every connection generates unique, non-replayable cryptographic context',
+      'Bilateral: both models contribute independent entropy — neither side can predict the other',
+      'Authenticated: multi-component identity verification prevents impersonation',
     ],
   },
   {
-    symbol: '[KEY]',
-    title: 'VectorGuard Key Derivation',
-    description: 'Generates cryptographic primitives directly from AI model internals. The model itself becomes the key -- no external key management infrastructure required.',
+    symbol: '[GCD]',
+    title: 'Geometric Cipher Derivation',
+    description: 'Transforms neural network weight spaces into 3D point clouds, then samples the geometric relationships between aligned anchor and entropy points. The resulting coordinate data becomes the raw material for cipher stream generation.',
     bullets: [
-      'Deterministic: identical model instances produce identical security surfaces',
-      'Unidirectional: model data transforms to keys, never reversed',
-      'Scales with model complexity: larger models yield exponentially greater security',
+      'Deterministic: identical model state always produces identical cipher streams',
+      'One-way: model data transforms to cipher material but cannot be reversed',
+      'Scales with model complexity: larger models yield exponentially greater security surfaces',
     ],
   },
   {
     symbol: '[LOCK]',
-    title: 'VectorLock Encryption',
-    description: 'Multi-layered data encryption system using model-derived key material. Binds encrypted data to user identity, model identity, and session state simultaneously.',
+    title: 'Data-at-Rest Protection',
+    description: 'Multi-layer block cipher for stored data. Combines geometric permutation with identity-bound encryption layers tied to specific users and model instances.',
     bullets: [
-      'Identity-bound: encryption tied to specific user and model instances',
-      'Multi-layer architecture prevents pattern analysis across all attack surfaces',
+      'Identity-bound: decryption requires the exact user and model combination',
+      'Geometric permutation prevents pattern analysis across stored data',
       'Perfectly reversible with correct parameters, computationally infeasible without',
     ],
   },
   {
     symbol: '[FLOW]',
-    title: 'VectorFlow Stream Generation',
-    description: 'Produces synchronized cypher streams consumed by both communicating models. Session-unique streams are destroyed automatically on completion.',
+    title: 'Cipher Stream Engine',
+    description: 'Generates synchronized cipher streams from shared geometric measurements. Session-unique streams are deterministically derived and destroyed on completion.',
     bullets: [
-      'Session-bound cypher stream synchronized across both models',
-      'Automatic stream destruction ensures perfect forward secrecy',
-      'Server blindness: network intermediaries never see intelligible data',
+      'Session-bound cipher streams stay synchronized across both models without coordination',
+      'Automatic stream destruction after session ensures forward secrecy',
+      'Network intermediaries see only encrypted data — model state never leaves the endpoint',
     ],
   },
   {
     symbol: '[STREAM]',
-    title: 'VectorStream Token Protection',
-    description: 'Applies cypher stream protection to AI model token outputs during transmission. Ensures each token is cryptographically bound to the session.',
+    title: 'Transport Encryption',
+    description: 'Two-layer encryption pipeline. The inner layer applies the cipher stream to tokenizer output at per-digit granularity. The outer layer wraps ciphertext in fixed-size encrypted frames that resist traffic analysis.',
     bullets: [
-      'Prevents replay, reordering, and injection attacks',
-      'Token-level granularity with session-specific protection',
-      'Lockstep encoding/decoding ensures perfect message recovery',
+      'Per-digit cipher operations — finer granularity than traditional byte-level encryption',
+      'Fixed-size transport frames eliminate message-length inference attacks (Whisper Leak class)',
+      'Built-in integrity verification and tamper detection on every frame',
     ],
   },
 ];
 
 const securityProperties = [
-  'Model-bound: cypher streams tied to specific AI model instances',
-  'Session isolation: each session generates entirely new cryptographic material',
-  'Session-limited decodability: cryptographic data destroyed when session completes',
-  'Server blindness: network intermediaries cannot decrypt without the originating models',
-  'Perfect forward secrecy: no persistent keys stored between sessions',
-  'Whisper Leak immune: no consistent traffic patterns for adversarial model training',
+  'Confidentiality: two-layer encryption applied before data reaches the transport mechanism',
+  'Integrity: cryptographic signatures on both routing metadata and message payloads',
+  'Authentication: multi-component identity derived from the model itself — no external PKI',
+  'Replay protection: monotonic sequence validation prevents message reordering and replay',
+  'Model-bound: cipher material is derived from specific model weights and runtime activations',
+  'Forward secrecy: session cipher state is destroyed on completion — old sessions cannot be recovered',
+  'MITM detection: multiple independent tamper-detection mechanisms trigger on interception',
+  'Traffic analysis resistance: fixed-size encrypted frames eliminate message-length inference',
 ];
 
 const nanoFeatures = [
-  { label: 'HMAC-SHA256 character shifting', detail: 'Deterministic obfuscation with shared secrets' },
-  { label: 'Zero dependencies', detail: 'Pure JavaScript, ~100 lines of auditable code' },
-  { label: 'Round-trip guaranteed', detail: 'Perfect message recovery every time' },
+  { label: 'Model-weight derived streams', detail: 'Cipher material sourced from real AI model weights via geometric measurement' },
+  { label: 'Multi-round obfuscation', detail: 'Multiple transformation passes with per-message nonce for session uniqueness' },
+  { label: 'Forward ratchet', detail: 'Cipher state advances after each exchange — previous sessions cannot be recovered' },
+  { label: 'Round-trip guaranteed', detail: 'Perfect message recovery with deterministic stream derivation' },
   { label: 'Agent-friendly', detail: 'Works with MCP, Claude Desktop, OpenClaw' },
-  { label: 'MIT licensed', detail: 'Free for any project, commercial or personal' },
+  { label: 'Apache 2.0 licensed', detail: 'Free for personal/educational use, commercial licensing available' },
 ];
 
 const comparisonRows = [
-  { feature: 'Method', nano: 'HMAC-SHA256 character shifting', full: 'Proprietary model-bound cryptography' },
-  { feature: 'Security Basis', nano: 'Pre-shared secrets', full: 'AI model internals (proprietary process)' },
-  { feature: 'Performance', nano: 'Instant (CPU)', full: 'Billions of digits/second (CUDA)' },
-  { feature: 'Whisper Leak', nano: 'Partial (timing patterns remain)', full: 'Complete immunity (no consistent patterns)' },
-  { feature: 'Forward Secrecy', nano: 'No', full: 'Yes (context-driven rotation)' },
-  { feature: 'Key Exchange', nano: 'Manual pre-shared', full: 'Automatic (model distribution = key distribution)' },
-  { feature: 'Session Management', nano: 'Manual timestamp', full: 'Automatic (bilateral key agreement)' },
-  { feature: 'Use Case', nano: 'Development, testing, casual use', full: 'Enterprise production, compliance' },
-  { feature: 'License', nano: 'MIT (free)', full: 'Enterprise licensing' },
+  { feature: 'Classification', nano: 'Geometric obfuscation', full: 'Model-bound encryption' },
+  { feature: 'Core Cipher', nano: 'Multi-round character shifting', full: 'Proprietary per-digit cipher' },
+  { feature: 'Cipher Source', nano: 'Geometric measurements from public model weights', full: 'Bilateral geometric consensus from local model state' },
+  { feature: 'Transport Security', nano: 'None (application-level only)', full: 'Fixed-size encrypted transport frames' },
+  { feature: 'Integrity', nano: 'None', full: 'Cryptographic signatures on headers + payloads' },
+  { feature: 'Authentication', nano: 'Shared secret', full: 'Multi-component model-bound identity' },
+  { feature: 'MITM Detection', nano: 'None', full: 'Multiple independent detection mechanisms' },
+  { feature: 'Forward Secrecy', nano: 'Table-ratchet-forward', full: 'Session state destruction + cipher stream regeneration' },
+  { feature: 'Use Case', nano: 'Development, testing, agent prototyping', full: 'Enterprise production, compliance' },
+  { feature: 'License', nano: 'Apache 2.0 (free for non-commercial)', full: 'Enterprise licensing' },
 ];
 
 /* ── Terminal UI Components ── */
@@ -322,7 +326,7 @@ const Home = () => {
             className="text-center max-w-4xl mx-auto"
           >
             <p className="text-amber text-sm uppercase tracking-widest mb-6">
-              {'>'} Model-Bound Cryptography & AI Security<span className="cursor-blink">_</span>
+              {'>'} Model-Bound Encryption for AI-to-AI Communication<span className="cursor-blink">_</span>
             </p>
             <h1 className="text-5xl md:text-7xl font-bold text-phosphor glow-text tracking-tight">
               ACTIVE-IQ
@@ -331,7 +335,10 @@ const Home = () => {
               SYSTEMS
             </p>
             <p className="mt-8 text-base md:text-lg text-offwhite/70 leading-relaxed max-w-3xl mx-auto">
-              VectorGuard is a proprietary AI security platform that derives cryptographic material directly from AI model internals. It enables secure, zero-trust AI-to-AI communication without traditional key exchange -- the model itself is the key.
+              VectorGuard is a model-bound encryption system that protects AI-to-AI communication <span className="text-phosphor">before</span> data reaches the transport layer. It derives cipher material from the geometric structure of neural network weight spaces, then applies that material through a proprietary per-digit cipher to encrypt tokenizer outputs. No classical keys are exchanged; both models derive shared cipher streams from their own internals via a bilateral handshake protocol.
+            </p>
+            <p className="mt-4 text-sm text-offwhite/50 leading-relaxed max-w-3xl mx-auto">
+              What distinguishes VectorGuard from traditional cryptography is its cipher source — neural network geometry — not a weaker security model. It provides confidentiality, integrity, authentication, and replay protection. The security surface scales directly with model size: even if TLS is compromised, ciphertext remains unreadable without the originating model state.
             </p>
             <div className="mt-10 flex flex-wrap justify-center gap-4">
               <button
@@ -351,10 +358,10 @@ const Home = () => {
               </a>
             </div>
             <div className="mt-10 flex flex-wrap justify-center gap-8 text-xs text-offwhite/40">
+              <span>[MODEL-BOUND ENCRYPTION]</span>
+              <span>[PRE-TRANSPORT CIPHER]</span>
+              <span>[NO KEY DEPENDENCY]</span>
               <span>[WHISPER LEAK IMMUNE]</span>
-              <span>[CUDA ACCELERATED]</span>
-              <span>[ZERO KEY EXCHANGE]</span>
-              <span>[PERFECT FORWARD SECRECY]</span>
             </div>
           </motion.div>
         </div>
@@ -375,25 +382,25 @@ const Home = () => {
                 <div>
                   <h3 className="text-lg font-bold text-phosphor mb-4">The MCP Security Gap</h3>
                   <p className="text-sm text-offwhite/70 leading-relaxed mb-4">
-                    Anthropic&apos;s Model Context Protocol (MCP) revolutionized AI-tool integration, but its transport layer shift from mandatory SSL to flexible HTTP streaming over TLS 1.3 created a critical security gap in the data custody chain for AI-to-AI communications.
+                    Anthropic&apos;s Model Context Protocol (MCP) revolutionized AI-tool integration, but its transport specification is TLS-agnostic &mdash; no version of the MCP transport layer mandates HTTPS or any specific encryption. Data custody for AI-to-AI communications is left entirely to deployment practices.
                   </p>
                   <div className="space-y-2 text-xs text-offwhite/60">
-                    <p className="flex items-start gap-2"><span className="text-amber flex-shrink-0">[!]</span> Data custody chain breaks in AI-to-AI communications</p>
+                    <p className="flex items-start gap-2"><span className="text-amber flex-shrink-0">[!]</span> MCP transport spec does not require encryption &mdash; HTTPS is optional</p>
                     <p className="flex items-start gap-2"><span className="text-amber flex-shrink-0">[!]</span> Man-in-the-middle risks on local/private deployments</p>
                     <p className="flex items-start gap-2"><span className="text-amber flex-shrink-0">[!]</span> Session hijacking during inter-model token handoffs</p>
-                    <p className="flex items-start gap-2"><span className="text-amber flex-shrink-0">[!]</span> IDS/IPS detection of AI communication patterns via metadata</p>
+                    <p className="flex items-start gap-2"><span className="text-amber flex-shrink-0">[!]</span> Traffic analysis exposes AI communication patterns via metadata</p>
                   </div>
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-amber mb-4">[WARNING] Whisper Leak Vulnerability</h3>
                   <p className="text-sm text-offwhite/70 leading-relaxed mb-4">
-                    Published by Microsoft researchers, Whisper Leak demonstrates that adversaries can infer LLM conversation topics with <span className="text-phosphor font-bold">&gt;98% accuracy</span> by analyzing encrypted TLS packet timing and sizes across 28 providers.
+                    Published November 2025 by Microsoft researchers, Whisper Leak demonstrates that adversaries can infer LLM conversation topics with <span className="text-phosphor font-bold">&gt;98% AUPRC</span> by analyzing encrypted TLS packet timing and sizes across 28 commercially available LLMs.
                   </p>
                   <div className="space-y-2 text-xs text-offwhite/60">
                     <p className="flex items-start gap-2"><span className="text-phosphor flex-shrink-0">{'>'}</span> TLS encryption protects content but NOT metadata</p>
-                    <p className="flex items-start gap-2"><span className="text-phosphor flex-shrink-0">{'>'}</span> Current patches (padding, batching) add 2-3x bandwidth overhead</p>
+                    <p className="flex items-start gap-2"><span className="text-phosphor flex-shrink-0">{'>'}</span> Mitigations (padding, batching, packet injection) add up to 2-3x bandwidth overhead</p>
                     <p className="flex items-start gap-2"><span className="text-phosphor flex-shrink-0">{'>'}</span> Microsoft&apos;s own research: &quot;none provides complete protection&quot;</p>
-                    <p className="flex items-start gap-2"><span className="text-phosphor flex-shrink-0">{'>'}</span> Affects ALL major LLM providers (OpenAI, Anthropic, Google, AWS)</p>
+                    <p className="flex items-start gap-2"><span className="text-phosphor flex-shrink-0">{'>'}</span> Tested across all major providers: OpenAI, Anthropic, Google, AWS, and more</p>
                   </div>
                   <p className="mt-4 text-xs text-phosphor font-bold">
                     VectorGuard doesn&apos;t patch Whisper Leak. It makes the attack methodology impossible.
@@ -410,10 +417,10 @@ const Home = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionDivider label="VECTORGUARD TECHNOLOGY" />
           <p className="text-offwhite/60 mb-4 text-sm">
-            VectorGuard operates as a pre-transport geometric obfuscation layer. The model itself is the key.
+            VectorGuard operates as a pre-transport encryption layer where the AI model itself is the cipher source.
           </p>
           <p className="text-offwhite/40 mb-10 text-xs">
-            {'>'} AI model internals -&gt; Geometric transformation -&gt; Bilateral key agreement -&gt; Cypher stream generation -&gt; Protected token transmission
+            {'>'} Model weights + activations -&gt; Geometric cipher derivation -&gt; Bilateral exchange -&gt; Per-digit encryption -&gt; Fixed-frame transport
           </p>
 
           {/* Communication Flow */}
@@ -427,14 +434,14 @@ const Home = () => {
             <TerminalBox title="PROTOCOL.flow">
               <h3 className="text-sm font-bold text-phosphor mb-4">AI-to-AI Communication Protocol</h3>
               <div className="space-y-1 text-xs text-offwhite/60 font-mono">
-                <p><span className="text-amber">[01]</span> Sender AI processes message through local model</p>
-                <p><span className="text-amber">[02]</span> Helix protocol initiates bilateral key agreement between models</p>
-                <p><span className="text-amber">[03]</span> Both models derive shared cryptographic material from their own internal state</p>
-                <p><span className="text-amber">[04]</span> VectorFlow generates synchronized cypher streams on both sides</p>
-                <p><span className="text-amber">[05]</span> VectorStream applies cypher protection to outbound token data</p>
-                <p><span className="text-amber">[06]</span> Protected tokens transmitted through standard transport layer</p>
-                <p><span className="text-amber">[07]</span> Receiver decodes tokens in lockstep using matching cypher stream</p>
-                <p><span className="text-amber">[08]</span> Receiver validates stream integrity and presents decrypted message</p>
+                <p><span className="text-amber">[01]</span> Bilateral handshake: both models exchange identity and geometric measurements</p>
+                <p><span className="text-amber">[02]</span> Shared cipher stream derived from combined geometric consensus — no keys transmitted</p>
+                <p><span className="text-amber">[03]</span> Sender tokenizes message and embeds tamper-detection markers</p>
+                <p><span className="text-amber">[04]</span> Per-digit cipher encrypts token stream against model-derived cipher material</p>
+                <p><span className="text-amber">[05]</span> Ciphertext packed into fixed-size encrypted transport frames (defeats traffic analysis)</p>
+                <p><span className="text-amber">[06]</span> Cryptographic signatures applied independently to routing and payload data</p>
+                <p><span className="text-amber">[07]</span> Receiver validates signatures, decrypts frames, and reverses the cipher to recover tokens</p>
+                <p><span className="text-amber">[08]</span> Tamper-detection markers verified — any interception attempt is flagged immediately</p>
               </div>
             </TerminalBox>
           </motion.div>
@@ -504,22 +511,27 @@ const Home = () => {
             <TerminalBox title="NANO.release">
               <div className="text-center mb-6">
                 <h2 className="text-2xl font-bold text-phosphor glow-text mb-2">VectorGuard-Nano</h2>
-                <p className="text-amber text-xs uppercase tracking-widest">MIT Licensed // Free Forever</p>
+                <p className="text-amber text-xs uppercase tracking-widest">Apache 2.0 // Free for Non-Commercial Use</p>
               </div>
               <p className="text-sm text-offwhite/70 leading-relaxed text-center max-w-2xl mx-auto mb-8">
-                Lightweight, open-source secure messaging for AI agents. Drop-in solution for OpenClaw, MCP servers, and Claude Desktop. Start securing your agents today while evaluating the full VectorGuard platform for enterprise.
+                Open-source geometric obfuscation for AI agent messaging. Derives cipher streams from real model weights via geometric measurement, then applies multi-round obfuscation to protect messages in transit. Session-based with forward ratcheting — each exchange advances the cipher state.
               </p>
 
               <div className="terminal-box p-4 mb-8 bg-void/50">
-                <pre className="text-xs text-phosphor overflow-x-auto"><code>{`// Simple agent-to-agent secure messaging
-const vgn = new Vgn();
-const secret = "shared-agent-secret-key";
+                <pre className="text-xs text-phosphor overflow-x-auto"><code>{`// VectorGuard-Nano v2 — session-based agent messaging
+const vgn = new VgnV2();
+const secret = "shared-agent-secret";
 
-// Agent A sends
-const secured = vgn.obfuscate("Launch data analysis", secret);
+// Agent A creates session (derives cipher stream from model weights)
+const session = await vgn.createSession("agentA", "agentB", secret);
+const initPacket = session.getInitPacket(); // send once to peer
 
-// Agent B receives
-const original = vgn.deobfuscate(secured, secret);
+// Agent A encodes (multi-round obfuscation against model-derived stream)
+const { encoded, nonce } = session.encode("Launch data analysis");
+
+// Agent B joins session from init packet, decodes
+const peerSession = await vgn.joinSession(initPacket, secret);
+const original = peerSession.decode(encoded, nonce);
 // Returns: "Launch data analysis"`}</code></pre>
               </div>
 
@@ -533,6 +545,20 @@ const original = vgn.deobfuscate(secured, secret);
                     <p className="text-[11px] text-offwhite/40 mt-1 ml-5">{detail}</p>
                   </div>
                 ))}
+              </div>
+
+              <div className="terminal-box p-4 mb-6 border-amber/30 bg-amber/5">
+                <p className="text-xs font-bold text-amber mb-2">[!] IMPORTANT: Usage Restrictions</p>
+                <p className="text-[11px] text-offwhite/60 mb-2">VectorGuard-Nano provides obfuscation, not encryption. NOT suitable for:</p>
+                <ul className="text-[11px] text-offwhite/50 space-y-1 ml-4">
+                  <li>• Financial transactions or healthcare data (HIPAA)</li>
+                  <li>• Personal identifiable information at scale</li>
+                  <li>• Mission-critical production systems</li>
+                  <li>• Replacing TLS/HTTPS encryption</li>
+                </ul>
+                <p className="text-[11px] text-offwhite/60 mt-3">
+                  <span className="text-amber font-bold">Commercial use?</span> Contact sales@active-iq.com for licensing.
+                </p>
               </div>
 
               <div className="flex flex-wrap justify-center gap-4">
@@ -641,7 +667,7 @@ const original = vgn.deobfuscate(secured, secret);
                       </a>
                       <a href="https://github.com/Active-IQ/VectorGuard-Nano" className="text-offwhite/50 hover:text-phosphor transition-colors flex items-center gap-2 text-xs" target="_blank" rel="noopener noreferrer">
                         <GitHubIcon className="h-4 w-4" />
-                        VectorGuard-Nano (MIT)
+                        VectorGuard-Nano (Apache 2.0)
                       </a>
                     </div>
                   </div>
